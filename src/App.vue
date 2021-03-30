@@ -86,7 +86,6 @@
 <script>
 export default {
   name: "App",
-  components: {},
   methods: {
     handleLogout() {
       this.$store.commit("updateLogout");

@@ -1,25 +1,56 @@
 <template>
   <div class="home">
     <h1 v-if="this.$store.state.isActive === true">Request</h1>
-    <div class="list-wrapper d-flex" v-for="item in allCoach" :key="item.id">
-      <div class="item-box">
-        {{ item.data.firstName }} | {{ item.data.lastName }}
-        <span class="hourlyRate">
-          {{ item.data.hourlyRate | addMoney }}
-        </span>
-        <span class="tags d-flex">Fronend</span>
-        <section class="btn-group d-flex">
-          <button class="btn">Contact</button>
-          <button class="btn">View Detail</button>
-        </section>
-      </div>
-    </div>
+    <v-card
+      class="mx-auto card"
+      max-width="650"
+      outlined
+      v-for="item in allCoach"
+      :key="item.id"
+    >
+      <v-list-item three-line>
+        <v-list-item-content>
+          <!-- <div class="overline mb-4">
+            {{ item.data.firstName }} {{ item.data.lastName }}
+          </div> -->
+          <v-list-item-title class="headline mb-1">
+            {{ item.data.firstName }} {{ item.data.lastName }}
+          </v-list-item-title>
+          <v-list-item-subtitle>
+            {{ item.data.description }}
+          </v-list-item-subtitle>
+          <v-list-item-subtitle>{{
+            item.data.hourlyRate | addMoney
+          }}</v-list-item-subtitle>
+        </v-list-item-content>
+
+        <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
+      </v-list-item>
+
+      <v-card-actions>
+        <v-btn rounded text> Contact </v-btn>
+        <v-btn @click="navigateDetail(item.uid)" outlined rounded text>
+          View Details
+        </v-btn>
+      </v-card-actions>
+    </v-card>
+
+    <router-view />
   </div>
 </template>
+  
+
+
+
+  
+
+
+
 
 <script>
 import { db } from "../firebase";
 const collectionPath = "users";
+import router from "../router/index";
 
 export default {
   name: "Home",
@@ -40,6 +71,15 @@ export default {
       });
   },
 
+  methods: {
+    navigateDetail(uid) {
+      router.push({
+        name: "Detail",
+        params: { uid },
+      });
+    },
+  },
+
   filters: {
     addMoney: function (value) {
       return value + " tl/hour";
@@ -49,39 +89,7 @@ export default {
 </script>
 
 <style scoped>
-* {
-  box-sizing: border-box;
-}
-
-.d-flex {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.list-wrapper {
-  width: 100%;
-}
-.item-box {
-  width: 30rem;
-  border: 1px solid #fefefe;
-  padding: 3rem;
+.card {
   margin: 1rem;
-  border-radius: 1rem;
-  box-shadow: 0 1px 24px #cacaca;
-}
-.tags {
-  border: 1px solid #cacaca;
-  width: 100px;
-  padding: 6px;
-  border-radius: 1rem;
-  box-shadow: 0 1px 12px red;
-}
-
-.btn {
-  width: 10rem;
-  padding: 12px;
-  border-radius: 1rem;
-  border: 1px solid #cacaca;
-  margin: 0.3rem;
 }
 </style>
