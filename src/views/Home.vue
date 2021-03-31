@@ -5,22 +5,29 @@
       <v-card class="mx-auto card" max-width="650" outlined>
         <v-card-actions class="d-flex">
           <v-switch
-            v-model="isFrontEnd"
+            v-model="filterTag"
             label="Front End "
             color="red"
-            value=""
+            value="frontend"
             hide-details
           ></v-switch>
 
           <v-switch
-            v-model="isBackEnd"
+            v-model="filterTag"
             label="Back End "
             color="primary"
-            value=""
+            value="backend"
+            hide-details
+          ></v-switch>
+
+          <v-switch
+            v-model="filterTag"
+            label="Career "
+            color="primary"
+            value="career"
             hide-details
           ></v-switch> </v-card-actions
       ></v-card>
-
       <v-card
         class="mx-auto card"
         max-width="650"
@@ -77,20 +84,7 @@ export default {
     return {
       uid: "",
       allCoach: [],
-      ex11: [
-        "red",
-        "indigo",
-        "orange",
-        "primary",
-        "secondary",
-        "success",
-        "info",
-        "warning",
-        "error",
-        "red darken-3",
-        "indigo darken-3",
-        "orange darken-3",
-      ],
+      filterTag: [],
     };
   },
 
@@ -126,6 +120,22 @@ export default {
     },
     toUpperCase: function (value) {
       return value.toUpperCase();
+    },
+  },
+  watch: {
+    filterTag: function () {
+      this.$bind(
+        "allCoach",
+        db
+          .collection(collectionPath)
+          .where(
+            "tags",
+            "array-contains-any",
+            this.filterTag.length == 0
+              ? ["frontend", "backend", "career"]
+              : this.filterTag
+          )
+      );
     },
   },
 };

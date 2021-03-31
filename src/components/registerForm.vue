@@ -96,6 +96,7 @@ export default {
           lastName: this.lastName,
           description: this.description,
           hourlyRate: this.hourlyRate,
+          tags: this.tags,
         })
         .then(() => {
           console.log("successful");
