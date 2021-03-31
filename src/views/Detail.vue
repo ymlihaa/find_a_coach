@@ -1,27 +1,102 @@
 <template>
-  <div></div>
+  <div class="detail-wrapper">
+    <div v-if="isRequest == false" class="main-container d-flex-col">
+      <v-avatar color="grey lighten-2" size="128"></v-avatar>
+      <span class="title mt-1"
+        >{{ userDetail[0].firstName }}
+        {{ userDetail[0].lastName }}
+      </span>
+
+      <section class="description mt-5">
+        {{ userDetail[0].description }}
+      </section>
+      <span class="request" @click="handleRequest">request</span>
+    </div>
+
+    <request-form v-if="isRequest == true"></request-form>
+  </div>
 </template>
 
 <script>
 import { db } from "../firebase";
-
+import Request from "../components/Request";
+import router from "../router/index";
 export default {
   props: ["uid"],
+  components: {
+    "request-form": Request,
+  },
   data() {
     return {
+      isRequest: false,
       userDetail: [],
     };
   },
+
+  methods: {
+    handleRequest() {
+      console.log(this.uid);
+      this.isRequest = true;
+      console.log(this.isRequest);
+    },
+  },
+
   mounted() {
-    db.collection("users")
-      .doc(this.uid)
-      .get()
-      .then((snapShot) => {
-        this.userDetail.push(snapShot.data());
-      });
+    if (this.uid) {
+      db.collection("users")
+        .doc(this.uid)
+        .get()
+        .then((snapShot) => {
+          this.userDetail.push(snapShot.data());
+        });
+    } else {
+      router.push("/");
+    }
   },
 };
 </script>
 
 <style scoped>
+.d-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.d-flex-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.mt-1 {
+  margin-top: 1rem;
+}
+
+.mt-5 {
+  margin-top: 5rem;
+}
+
+.detail-wrapper {
+  max-width: 720px;
+  height: 70vh;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5rem;
+}
+
+.main-container {
+  padding: 2rem;
+}
+.request {
+  float: right;
+  padding: 1rem;
+  border: 1px solid #cacaca;
+  border-radius: 8px;
+  margin: 1rem;
+  background-color: #488fef;
+  color: white;
+  cursor: pointer;
+}
 </style>

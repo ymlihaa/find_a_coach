@@ -8,6 +8,7 @@ export const store = new Vuex.Store({
     uid: "",
     isActive: false,
     isLoading: true,
+    isRequest: false,
   },
   mutations: {
     updateLoginAndRegister(state, payload) {
@@ -19,6 +20,9 @@ export const store = new Vuex.Store({
     },
     isLoading(state) {
       state.isLoading = false;
+    },
+    isRequest(state) {
+      state.isRequest = !state.isRequest;
     },
   },
 

@@ -51,7 +51,7 @@
         >
           <router-link to="/register">
             <v-btn color="white" text rounded class="my-2">
-              Register
+              Sign Up
             </v-btn></router-link
           >
         </v-btn>

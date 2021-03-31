@@ -1,27 +1,43 @@
-<template>
+<template >
   <div>
-    <div
-      v-if="this.$store.state.isActive === false"
-      class="register-first-step"
-    >
-      <form @submit.prevent="registerUser">
-        <input
-          type="email"
+    <div class="w-100 d-flex" v-if="this.$store.state.isActive === false">
+      <v-form
+        class="w-50 d-flex-col mt-10"
+        ref="form"
+        lazy-validation
+        outlined
+        @submit.prevent="registerUser"
+      >
+        <v-text-field
+          class="w-50"
           v-model="formData.email"
-          placeholder="Please enter the email"
-        />
-        <input
-          type="password"
+          :counter="10"
+          label="E-mail"
+          required
+        ></v-text-field>
+
+        <v-text-field
+          class="input-group--focused w-50"
           v-model="formData.password"
-          placeholder="Please enter the password"
-        />
-        <input
-          type="password"
+          :type="show3 ? 'text' : 'password'"
+          label="Password"
+          required
+        ></v-text-field>
+        <v-text-field
+          class="input-group--focused w-50"
           v-model="formData.confirmPassword"
-          placeholder="Confirm the password"
-        />
-        <button type="submit">Register</button>
-      </form>
+          :type="show4 ? 'text' : 'password'"
+          label="Password"
+          required
+        ></v-text-field>
+        <div class="d-flex">
+          <v-btn color="success" class="mr-4" @click="registerUser">
+            Sing Up
+          </v-btn>
+
+          <v-btn color="error" class="mr-4" @click="reset"> Reset Form </v-btn>
+        </div>
+      </v-form>
     </div>
     <div
       class="register-second-step"
@@ -31,6 +47,20 @@
     </div>
   </div>
 </template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <script>
 import firebase from "firebase/app";
@@ -44,10 +74,16 @@ export default {
   },
   data() {
     return {
+      show3: false,
+      show4: false,
       formData: {
         email: "",
         password: "",
         confirmPassword: "",
+      },
+      rules: {
+        required: (value) => !!value || "Required.",
+        min: (v) => v.length >= 8 || "Min 8 characters",
       },
     };
   },
@@ -83,8 +119,41 @@ export default {
           console.log("errorMessage: ", errorMessage);
         });
     },
+    reset() {
+      this.formData.email = "";
+      this.formData.password = "";
+      this.formData.confirmPassword = "";
+    },
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.w-100 {
+  width: 100%;
+}
+.w-50 {
+  width: 50%;
+}
+
+.h-100 {
+  height: 100vh;
+}
+
+.mt-10 {
+  margin-top: auto;
+}
+
+.d-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.d-flex-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+</style>
