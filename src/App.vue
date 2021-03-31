@@ -2,7 +2,7 @@
 <template>
   <v-app>
     <v-footer color="primary lighten-1" padless>
-      <v-row justify="center" no-gutters>
+      <v-row justify="justify" no-gutters>
         <router-link to="/">
           <v-btn color="white" text rounded class="my-2"> Home </v-btn>
         </router-link>
@@ -20,6 +20,12 @@
             </v-btn></router-link
           >
         </v-btn>
+
+        <v-tab>
+          <v-badge color="green" :content="this.$store.state.msgCount">
+            Request
+          </v-badge>
+        </v-tab>
 
         <v-btn
           v-if="this.$store.state.isActive !== false"
@@ -79,9 +85,13 @@
 <script>
 export default {
   name: "App",
+  data() {
+    return {};
+  },
   methods: {
     handleLogout() {
       this.$store.commit("updateLogout");
+      this.$store.state.msgCount = 0;
     },
   },
 };

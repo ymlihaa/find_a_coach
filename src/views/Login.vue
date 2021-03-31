@@ -49,6 +49,7 @@ export default {
       email: "",
       password: "",
       valid: true,
+      show3: false,
     };
   },
   methods: {
@@ -57,11 +58,12 @@ export default {
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then((user) => {
+          const uid = user.user.uid;
           this.$store.commit("updateLoginAndRegister", {
-            uid: user.uid,
+            uid: uid,
             isActive: true,
           });
-          router.push("/");
+          router.push("/profile");
         })
         .catch((err) => console.log(err));
     },
