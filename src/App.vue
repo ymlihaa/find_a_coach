@@ -35,13 +35,6 @@
           >
         </v-btn>
 
-        <v-btn color="white" text rounded class="my-2">
-          <router-link to="/about">
-            <v-btn color="white" text rounded class="my-2">
-              About
-            </v-btn></router-link
-          >
-        </v-btn>
         <v-btn
           v-if="this.$store.state.isActive !== true"
           color="white"
