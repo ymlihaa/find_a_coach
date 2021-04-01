@@ -51,6 +51,7 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 import router from "../router/index";
+
 export default {
   data() {
     return {
@@ -74,7 +75,8 @@ export default {
             isActive: true,
             mail: email,
           });
-          router.push("/profile");
+
+          router.push("/messages");
         })
         .catch((err) => console.log(err));
     },

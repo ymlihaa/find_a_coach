@@ -34,7 +34,7 @@
             <v-sheet min-height="70vh" rounded="lg">
               <v-row>
                 <v-col>
-                  <div class="d-flex-col">
+                  <div class="main-container d-flex-col">
                     <v-avatar color="grey lighten-2" size="128"></v-avatar>
                     <span class="title mt-1"
                       >{{ userDetail.firstName }}
@@ -78,9 +78,6 @@ export default {
       "userDetail",
       db.collection(collectionPath).doc(this.$store.state.uid)
     );
-    this.$bind("allMessages", db.collection(this.$store.state.uid)).then(() => {
-      this.$store.state.msgCount = this.allMessages.length;
-    });
   },
 };
 </script>
@@ -112,6 +109,7 @@ export default {
 }
 
 .main-container {
+  padding: 2rem;
 }
 .request {
   float: right;

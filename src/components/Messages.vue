@@ -75,7 +75,9 @@ export default {
 
   created() {
     console.log(this.$store.state.currentEmail);
-    this.$bind("allMessages", db.collection(this.$store.state.uid));
+    this.$bind("allMessages", db.collection(this.$store.state.uid)).then(() => {
+      this.$store.state.msgCount = this.allMessages.length;
+    });
     console.log(this.allMessages);
     this.email = this.$store.state.currentUserEmail;
   },

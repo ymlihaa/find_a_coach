@@ -9,23 +9,32 @@
         >{{ userDetail[0].firstName }}
         {{ userDetail[0].lastName }}
       </span>
-
-      <!-- <section class="description mt-5">
+      <!-- 
+      <section class="description mt-5 w-50">
         {{ userDetail[0].description }}
       </section> -->
 
-      <v-sheet class="mt-1" min-height="10vh " rounded="lg">
+      <!-- <v-sheet class="mt-1 w-50" min-height="20vh " rounded="lg">
         {{ userDetail[0].description }}
-      </v-sheet>
+      </v-sheet> -->
+
+      <v-card class="mt-1 w-100 card" elevation="1" outlined tile>
+        <div>{{ userDetail[0].description }}</div>
+      </v-card>
 
       <div class="d-flex">
-        <v-card-actions v-for="(tag, index) in userDetail[0].tags" :key="index">
-          <v-btn outlined rounded text>
-            {{ tag }}
-          </v-btn>
-        </v-card-actions>
+        <div class="mt-1 d-flex">
+          <v-card-actions
+            v-for="(tag, index) in userDetail[0].tags"
+            :key="index"
+          >
+            <v-btn outlined rounded text>
+              {{ tag }}
+            </v-btn>
+          </v-card-actions>
+        </div>
       </div>
-      <span class="request" @click="handleRequest">request</span>
+      <span class="request w-100" @click="handleRequest">request</span>
     </div>
 
     <request-form
@@ -80,6 +89,19 @@ export default {
 </script>
 
 <style scoped>
+.w-100 {
+  width: 100%;
+}
+
+.card {
+  min-width: 70vh;
+  overflow: auto;
+  word-break: break-all;
+  white-space: normal;
+  height: 50vh;
+  padding: 3rem;
+}
+
 .d-flex {
   display: flex;
   align-items: center;
