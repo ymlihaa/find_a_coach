@@ -45,6 +45,18 @@
                     <v-sheet min-height="30vh" rounded="lg">
                       {{ userDetail.description }}
                     </v-sheet>
+
+                    <v-card
+                      outlined
+                      class="p-1 mr-1"
+                      v-for="(tag, index) in userDetail.tags"
+                      :key="index"
+                      max-width="72"
+                    >
+                      <v-list-item-subtitle class="mt-1"
+                        ><strong>{{ tag }}</strong></v-list-item-subtitle
+                      >
+                    </v-card>
                   </div>
 
                   <request-form v-if="isRequest == true"></request-form>
@@ -120,5 +132,9 @@ export default {
   background-color: #488fef;
   color: white;
   cursor: pointer;
+}
+.p-1 {
+  padding: 0.5rem;
+  width: auto;
 }
 </style>
