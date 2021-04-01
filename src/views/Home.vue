@@ -44,17 +44,31 @@
               <v-list-item-subtitle>
                 {{ item.description }}
               </v-list-item-subtitle>
-              <v-list-item-subtitle>{{
-                item.hourlyRate | addMoney
-              }}</v-list-item-subtitle>
+              <v-list-item-subtitle>
+                {{ item.hourlyRate | addMoney }}
+              </v-list-item-subtitle>
             </v-list-item-content>
+
             <v-list-item-avatar
+              class="avatar"
               tile
               size="80"
               color="grey"
-            ></v-list-item-avatar>
+              max-width="80"
+            >
+            </v-list-item-avatar>
           </v-list-item>
-
+          <v-card
+            outlined
+            class="p-1 float-right mr-1"
+            v-for="(tag, index) in item.tags"
+            :key="index"
+            max-width="72"
+          >
+            <v-list-item-subtitle class="mt-1"
+              ><strong>{{ tag }}</strong></v-list-item-subtitle
+            >
+          </v-card>
           <v-card-actions>
             <v-btn
               v-if="condition(item.id)"
@@ -138,7 +152,7 @@ export default {
 
   filters: {
     addMoney: function (value) {
-      return value + " tl/hour";
+      return value.toString() + " tl/hour";
     },
     toUpperCase: function (value) {
       return value.toUpperCase();
@@ -167,6 +181,22 @@ export default {
 </script>
 
 <style scoped>
+.avatar {
+  width: 50px;
+}
+
+.mr-1 {
+  margin-right: 0.5rem;
+}
+
+.p-1 {
+  padding: 0.5rem;
+  width: auto;
+}
+
+.tag-card {
+  width: 5rem;
+}
 .card {
   margin: 1rem;
 }

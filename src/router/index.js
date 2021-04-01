@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-// import { store } from "../store/store";
+import { store } from "../store/store";
 
 Vue.use(VueRouter);
 
@@ -33,9 +33,9 @@ const routes = [
   {
     path: "/profile",
     name: "Profile",
-    // beforeEnter: (to, from, next) => {
-    //   !store.state.isActive ? next({ name: "Login" }) : next();
-    // },
+    beforeEnter: (to, from, next) => {
+      !store.state.isActive ? next({ name: "Login" }) : next();
+    },
 
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -57,6 +57,9 @@ const routes = [
   {
     path: "/messages",
     name: "Messages",
+    beforeEnter: (to, from, next) => {
+      !store.state.isActive ? next({ name: "Login" }) : next();
+    },
     props: true,
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route

@@ -31,6 +31,7 @@
       <v-text-field
         class="input-group--focused w-50"
         label="Hourly Rate"
+        v-model="hourlyRate"
         required
       ></v-text-field>
       <div class="selectBoxs d-flex">
