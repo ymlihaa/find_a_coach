@@ -56,7 +56,12 @@
           </v-list-item>
 
           <v-card-actions>
-            <v-btn rounded text @click="handleRequest(item.id)">
+            <v-btn
+              v-if="condition(item.id)"
+              rounded
+              text
+              @click="handleRequest(item.id)"
+            >
               Contact
             </v-btn>
             <v-btn @click="navigateDetail(item.id)" outlined rounded text>
@@ -118,6 +123,17 @@ export default {
         backgroundColor: "red",
       };
     },
+    condition: function () {
+      var vm = this;
+      return function (id) {
+        if (vm.uid !== null) {
+          if (vm.uid == id) {
+            return false;
+          }
+        }
+        return true;
+      };
+    },
   },
 
   filters: {
@@ -143,6 +159,9 @@ export default {
           )
       );
     },
+  },
+  created() {
+    this.uid = this.$store.state.uid;
   },
 };
 </script>

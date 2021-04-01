@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state: {
-    uid: "",
+    uid: null,
     isActive: false,
     isLoading: true,
     isRequest: false,
