@@ -1,5 +1,5 @@
 <template>
-  <div class="detail-wrapper">
+  <div class="detail-wrapper d-flex">
     <div
       v-if="this.$store.state.isRequest == false"
       class="main-container d-flex-col"
@@ -10,9 +10,21 @@
         {{ userDetail[0].lastName }}
       </span>
 
-      <section class="description mt-5">
+      <!-- <section class="description mt-5">
         {{ userDetail[0].description }}
-      </section>
+      </section> -->
+
+      <v-sheet class="mt-1" min-height="10vh " rounded="lg">
+        {{ userDetail[0].description }}
+      </v-sheet>
+
+      <div class="d-flex">
+        <v-card-actions v-for="(tag, index) in userDetail[0].tags" :key="index">
+          <v-btn outlined rounded text>
+            {{ tag }}
+          </v-btn>
+        </v-card-actions>
+      </div>
       <span class="request" @click="handleRequest">request</span>
     </div>
 
