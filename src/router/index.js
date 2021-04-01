@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import { store } from "../store/store";
+// import { store } from "../store/store";
 
 Vue.use(VueRouter);
 
@@ -33,9 +33,9 @@ const routes = [
   {
     path: "/profile",
     name: "Profile",
-    beforeEnter: (to, from, next) => {
-      !store.state.isActive ? next({ name: "Login" }) : next();
-    },
+    // beforeEnter: (to, from, next) => {
+    //   !store.state.isActive ? next({ name: "Login" }) : next();
+    // },
 
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -53,6 +53,16 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Detail.vue"),
+  },
+  {
+    path: "/messages",
+    name: "Messages",
+    props: true,
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../components/Messages.vue"),
   },
 ];
 

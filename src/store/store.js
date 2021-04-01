@@ -10,11 +10,13 @@ export const store = new Vuex.Store({
     isLoading: true,
     isRequest: false,
     msgCount: 0,
+    currentUserEmail: "",
   },
   mutations: {
     updateLoginAndRegister(state, payload) {
       state.uid = payload.uid;
       state.isActive = payload.isActive;
+      state.currentUserEmail = payload.mail;
     },
     updateLogout(state) {
       (state.uid = ""), (state.isActive = false);

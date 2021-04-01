@@ -1,69 +1,75 @@
 <template>
-  <div class="home">
-    <h1 v-if="this.$store.state.isActive === true">Request</h1>
-    <div v-if="this.$store.state.isRequest == false">
-      <v-card class="mx-auto card" max-width="650" outlined>
-        <v-card-actions class="d-flex">
-          <v-switch
-            v-model="filterTag"
-            label="Front End "
-            color="red"
-            value="frontend"
-            hide-details
-          ></v-switch>
+  <transition name="fade">
+    <div class="home">
+      <div v-if="this.$store.state.isRequest == false">
+        <v-card class="mx-auto card" max-width="650" outlined>
+          <v-card-actions class="d-flex">
+            <v-switch
+              v-model="filterTag"
+              label="Front End "
+              color="red"
+              value="frontend"
+              hide-details
+            ></v-switch>
 
-          <v-switch
-            v-model="filterTag"
-            label="Back End "
-            color="primary"
-            value="backend"
-            hide-details
-          ></v-switch>
+            <v-switch
+              v-model="filterTag"
+              label="Back End "
+              color="primary"
+              value="backend"
+              hide-details
+            ></v-switch>
 
-          <v-switch
-            v-model="filterTag"
-            label="Career "
-            color="primary"
-            value="career"
-            hide-details
-          ></v-switch> </v-card-actions
-      ></v-card>
-      <v-card
-        class="mx-auto card"
-        max-width="650"
-        outlined
-        v-for="item in allCoach"
-        :key="item.id"
-      >
-        <v-list-item three-line>
-          <v-list-item-content>
-            <v-list-item-title class="headline mb-1">
-              {{ item.firstName }}
-              {{ item.lastName }}
-            </v-list-item-title>
-            <v-list-item-subtitle>
-              {{ item.description }}
-            </v-list-item-subtitle>
-            <v-list-item-subtitle>{{
-              item.hourlyRate | addMoney
-            }}</v-list-item-subtitle>
-          </v-list-item-content>
-          <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
-        </v-list-item>
+            <v-switch
+              v-model="filterTag"
+              label="Career "
+              color="primary"
+              value="career"
+              hide-details
+            ></v-switch> </v-card-actions
+        ></v-card>
+        <v-card
+          class="mx-auto card"
+          max-width="650"
+          outlined
+          v-for="item in allCoach"
+          :key="item.id"
+        >
+          <v-list-item three-line>
+            <v-list-item-content>
+              <v-list-item-title class="headline mb-1">
+                {{ item.firstName }}
+                {{ item.lastName }}
+              </v-list-item-title>
+              <v-list-item-subtitle>
+                {{ item.description }}
+              </v-list-item-subtitle>
+              <v-list-item-subtitle>{{
+                item.hourlyRate | addMoney
+              }}</v-list-item-subtitle>
+            </v-list-item-content>
+            <v-list-item-avatar
+              tile
+              size="80"
+              color="grey"
+            ></v-list-item-avatar>
+          </v-list-item>
 
-        <v-card-actions>
-          <v-btn rounded text @click="handleRequest(item.id)"> Contact </v-btn>
-          <v-btn @click="navigateDetail(item.id)" outlined rounded text>
-            View Details
-          </v-btn>
-        </v-card-actions>
-      </v-card>
+          <v-card-actions>
+            <v-btn rounded text @click="handleRequest(item.id)">
+              Contact
+            </v-btn>
+            <v-btn @click="navigateDetail(item.id)" outlined rounded text>
+              View Details
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </div>
+      <div v-if="this.$store.state.isRequest === true">
+        <request-form :uid="uid"></request-form>
+      </div>
     </div>
-    <div v-if="this.$store.state.isRequest === true">
-      <request-form :uid="uid"></request-form>
-    </div>
-    <router-view />
-  </div>
+  </transition>
 </template>
   
 
@@ -89,7 +95,7 @@ export default {
   },
 
   firestore: {
-    allCoach: db.collection(collectionPath),
+    allCoach: db.collection(collectionPath).where("firstName", "!=", null),
   },
 
   methods: {
@@ -154,5 +160,14 @@ export default {
 .tags {
   background-color: red;
   color: white;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

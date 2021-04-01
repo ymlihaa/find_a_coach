@@ -2,40 +2,45 @@
   <div>
     <div class="w-100 d-flex" v-if="this.$store.state.isActive === false">
       <v-form
-        class="w-50 d-flex-col mt-10"
+        class="form w-50 d-flex-col mt-10"
         ref="form"
         lazy-validation
         outlined
         @submit.prevent="registerUser"
       >
-        <v-text-field
-          class="w-50"
-          v-model="formData.email"
-          :counter="10"
-          label="E-mail"
-          required
-        ></v-text-field>
+        <div class="w-50">
+          <v-text-field
+            class="w-100"
+            v-model="formData.email"
+            :counter="10"
+            label="E-mail"
+            required
+          ></v-text-field>
 
-        <v-text-field
-          class="input-group--focused w-50"
-          v-model="formData.password"
-          :type="show3 ? 'text' : 'password'"
-          label="Password"
-          required
-        ></v-text-field>
-        <v-text-field
-          class="input-group--focused w-50"
-          v-model="formData.confirmPassword"
-          :type="show4 ? 'text' : 'password'"
-          label="Password"
-          required
-        ></v-text-field>
-        <div class="d-flex">
-          <v-btn color="success" class="mr-4" @click="registerUser">
-            Sing Up
-          </v-btn>
+          <v-text-field
+            class="input-group--focused w-100"
+            v-model="formData.password"
+            :type="show3 ? 'text' : 'password'"
+            label="Password"
+            required
+          ></v-text-field>
+          <v-text-field
+            class="input-group--focused w-100"
+            v-model="formData.confirmPassword"
+            :type="show4 ? 'text' : 'password'"
+            label="Password"
+            required
+          ></v-text-field>
 
-          <v-btn color="error" class="mr-4" @click="reset"> Reset Form </v-btn>
+          <div class="d-flex-col">
+            <v-btn color="primary" class="w-100 mt-3" @click="registerUser">
+              Sing Up
+            </v-btn>
+
+            <v-btn color="error" class="w-100 mt-3" @click="reset">
+              Reset Form
+            </v-btn>
+          </div>
         </div>
       </v-form>
     </div>
@@ -130,9 +135,15 @@ export default {
 }
 
 .mt-10 {
-  margin-top: auto;
+  margin-top: 10rem;
+}
+.mt-3 {
+  margin-top: 3rem;
 }
 
+.form {
+  min-height: 70vh;
+}
 .d-flex {
   display: flex;
   align-items: center;
