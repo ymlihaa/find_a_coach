@@ -23,6 +23,7 @@
 
 <script>
 import { db } from "../firebase";
+import router from "../router/index";
 
 export default {
   props: ["uid"],
@@ -37,20 +38,21 @@ export default {
       const requestID = this.makeid(7);
       console.log(requestID);
 
-      try {
-        db.collection(this.uid)
-          .doc(requestID)
-          .set({
-            mail: this.email,
-            msg: this.description,
-          })
-          .then(() => {
-            console.log(this.uid);
-          });
-      } catch (err) {
-        console.log(err);
-        alert("işleminiz Gerçekleştirilemedi ");
-      }
+      db.collection(this.uid)
+        .doc(requestID)
+        .set({
+          mail: this.email,
+          msg: this.description,
+        })
+        .then(() => {
+          console.log(this.uid);
+          alert("Mesajınız Gönderildi . ");
+          this.$store.commit("isRequest");
+          router.push("/");
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
     },
     handleCancel() {
       this.$store.commit("isRequest");

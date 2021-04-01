@@ -53,7 +53,7 @@
 
         <v-tab v-if="this.$store.state.isActive !== false">
           <v-badge color="green" :content="this.$store.state.msgCount">
-            <router-link to="/messages">Messages</router-link>
+            <router-link to="/profile">Messages</router-link>
           </v-badge>
         </v-tab>
 
@@ -65,7 +65,7 @@
           class="my-2"
           v-if="this.$store.state.isActive"
         >
-          <router-link to="/profile">Logout</router-link>
+          <router-link to="/">Logout</router-link>
         </v-btn>
       </v-container>
     </v-app-bar>
@@ -74,9 +74,9 @@
       <v-container>
         <v-row>
           <v-col>
-            <!-- <v-sheet class="p-3" min-height="70vh" rounded="lg"> -->
-            <transition name="fade"> <router-view /> </transition>>
-            <!-- </v-sheet> -->
+            <v-sheet class="p-3" min-height="70vh" rounded="lg">
+              <transition name="fade"> <router-view /> </transition>>
+            </v-sheet>
           </v-col>
         </v-row>
       </v-container>

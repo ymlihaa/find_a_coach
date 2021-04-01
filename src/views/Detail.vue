@@ -1,6 +1,9 @@
 <template>
   <div class="detail-wrapper">
-    <div v-if="isRequest == false" class="main-container d-flex-col">
+    <div
+      v-if="this.$store.state.isRequest == false"
+      class="main-container d-flex-col"
+    >
       <v-avatar color="grey lighten-2" size="128"></v-avatar>
       <span class="title mt-1"
         >{{ userDetail[0].firstName }}
@@ -13,7 +16,10 @@
       <span class="request" @click="handleRequest">request</span>
     </div>
 
-    <request-form v-if="isRequest == true"></request-form>
+    <request-form
+      v-if="this.$store.state.isRequest == true"
+      :uid="id"
+    ></request-form>
   </div>
 </template>
 
@@ -28,6 +34,7 @@ export default {
   },
   data() {
     return {
+      id: "",
       isRequest: false,
       userDetail: [],
     };
@@ -36,7 +43,7 @@ export default {
   methods: {
     handleRequest() {
       console.log(this.uid);
-      this.isRequest = true;
+      this.$store.commit("isRequest");
       console.log(this.isRequest);
     },
   },
@@ -52,6 +59,10 @@ export default {
     } else {
       router.push("/");
     }
+  },
+
+  created() {
+    this.id = this.uid;
   },
 };
 </script>

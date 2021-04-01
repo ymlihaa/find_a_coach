@@ -1,14 +1,16 @@
 <template >
   <transition name="fade">
-    <div class="w-100 d-flex">
+    <div class="w-100 d-flex-col">
       <v-form
-        class="form w-50 d-flex-col mt-10"
+        class="form w-50 d-flex-col"
         ref="form"
         v-model="valid"
         lazy-validation
         outlined
         @submit.prevent="handleLogin"
       >
+        <img src="../assets/login_logo.svg" alt="" />
+
         <div class="w-50">
           <v-text-field
             class="w-100"
@@ -85,6 +87,10 @@ export default {
 </script>
 
 <style scoped>
+img {
+  width: 33%;
+}
+
 .w-100 {
   width: 100%;
 }
@@ -114,8 +120,8 @@ export default {
 .d-flex-col {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
 .fade-enter-active,

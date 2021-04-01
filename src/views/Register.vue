@@ -8,6 +8,8 @@
         outlined
         @submit.prevent="registerUser"
       >
+        <img src="../assets/login_logo.svg" alt="" />
+
         <div class="w-50">
           <v-text-field
             class="w-100"
@@ -123,6 +125,9 @@ export default {
 </script>
 
 <style scoped>
+img {
+  width: 33%;
+}
 .w-100 {
   width: 100%;
 }
