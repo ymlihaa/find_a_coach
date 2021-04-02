@@ -11,6 +11,7 @@ export const store = new Vuex.Store({
     isRequest: false,
     msgCount: 0,
     currentUserEmail: "",
+    dialog: false,
   },
   mutations: {
     updateLoginAndRegister(state, payload) {
@@ -26,6 +27,9 @@ export const store = new Vuex.Store({
     },
     isRequest(state) {
       state.isRequest = !state.isRequest;
+    },
+    isDialog(state, payload) {
+      state.dialog = payload.isShow;
     },
   },
 

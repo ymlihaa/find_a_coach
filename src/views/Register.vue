@@ -53,25 +53,10 @@
     >
       <form-register> </form-register>
     </div>
-
-    <div class="text-center">
-      <v-dialog v-model="dialog" width="500">
-        <v-card>
-          <v-card-title class="headline grey lighten-2"> Warning </v-card-title>
-
-          <v-card-text>
-            {{ errorMessage }}
-          </v-card-text>
-
-          <v-divider></v-divider>
-
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="primary" text @click="dialog = false"> Ok </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-    </div>
+    <dialog-app
+      v-if="this.$store.state.dialog"
+      :dialogMessage="errorMessage"
+    ></dialog-app>
   </div>
 </template>
 
@@ -84,14 +69,15 @@ import "firebase/auth";
 import "firebase/firestore";
 import { db } from "../firebase";
 import registerForm from "../components/registerForm";
+import Dialog from "../components/Dialog";
 export default {
   components: {
     "form-register": registerForm,
+    "dialog-app": Dialog,
   },
   data() {
     return {
       errorMessage: "",
-      dialog: false,
       show3: false,
       show4: false,
       formData: {
@@ -132,7 +118,7 @@ export default {
         })
         .catch((error) => {
           this.errorMessage = error.message;
-          this.dialog = true;
+          this.$store.commit("isDialog", { isShow: true });
         });
     },
     reset() {

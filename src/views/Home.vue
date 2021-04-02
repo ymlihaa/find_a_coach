@@ -85,7 +85,7 @@
         </v-card>
       </div>
       <div v-if="this.$store.state.isRequest === true">
-        <request-form :uid="uid"></request-form>
+        <request-form :uid="receiverId"></request-form>
       </div>
     </div>
   </transition>

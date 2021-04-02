@@ -1,24 +1,36 @@
 <template>
-  <div class="detail-wrapper">
-    <span class="cancel float-l d-flex" @click="handleCancel">X</span>
-    <div class="main-container">
-      <v-text-field
-        class="w-100"
-        v-model="email"
-        :counter="10"
-        label="Your E-mail"
-        required
-      ></v-text-field>
-      <v-textarea v-model="description" color="teal" class="w-100">
-        <template v-slot:label>
-          <div>Description <small>(optional)</small></div>
-        </template>
-      </v-textarea>
-      <div class="d-flex-col">
-        <span class="request" @click="sendRequest">Request</span>
-      </div>
-    </div>
-  </div>
+  <v-row justify="center">
+    <v-dialog v-model="dialog" persistent max-width="600px">
+      <v-card>
+        <v-card-title>
+          <v-text-field
+            class="input-group--focused w-50"
+            v-model="lastName"
+            label="Your E-mail"
+            required
+          ></v-text-field>
+        </v-card-title>
+        <v-card-text>
+          <v-container>
+            <v-row>
+              <v-textarea v-model="description" color="teal" class="w-50">
+                <template v-slot:label>
+                  <div>Your Message</div>
+                </template>
+              </v-textarea>
+            </v-row>
+          </v-container>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1" text @click="handleCancel">
+            Close
+          </v-btn>
+          <v-btn color="blue darken-1" text @click="sendRequest"> Send </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </v-row>
 </template>
 
 <script>
@@ -29,6 +41,7 @@ export default {
   props: ["uid"],
   data() {
     return {
+      dialog: this.$store.state.isRequest,
       email: "",
       description: "",
     };

@@ -38,46 +38,23 @@
           </div>
         </div>
       </v-form>
-
-      <template>
-        <div class="text-center">
-          <v-dialog v-model="dialog" width="500">
-            <v-card>
-              <v-card-title class="headline grey lighten-2">
-                Warning
-              </v-card-title>
-
-              <v-card-text>
-                {{ errorMessage }}
-              </v-card-text>
-
-              <v-divider></v-divider>
-
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="primary" text @click="dialog = false"> Ok </v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-        </div>
-      </template>
-    </div></transition
-  >
+      <dialog-app
+        v-if="this.$store.state.dialog == true"
+        :dialogMessage="errorMessage"
+      ></dialog-app></div
+  ></transition>
 </template>
-
-
-   
-
-
-
 
 
 <script>
 import firebase from "firebase/app";
 import "firebase/auth";
 import router from "../router/index";
-
+import Dialog from "../components/Dialog";
 export default {
+  components: {
+    "dialog-app": Dialog,
+  },
   data() {
     return {
       email: "",
@@ -85,7 +62,7 @@ export default {
       valid: true,
       show3: false,
       errorMessage: "",
-      dialog: false,
+      showDialog: this.$store.state.dialog,
     };
   },
   methods: {
@@ -102,12 +79,11 @@ export default {
             isActive: true,
             mail: email,
           });
-
           router.push("/messages");
         })
         .catch((error) => {
+          this.$store.commit("isDialog", { isShow: true });
           this.errorMessage = error.message;
-          this.dialog = true;
         });
     },
     reset() {
