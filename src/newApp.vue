@@ -2,6 +2,8 @@
   <v-app id="inspire">
     <v-app-bar app color="blue" flat>
       <v-container class="py-0 fill-height">
+        <img src="./assets/login_logo.svg" alt="" />
+        <h2 class="logo-title">Find a Coach</h2>
         <v-spacer></v-spacer>
 
         <!-- <v-responsive max-width="260">
@@ -133,6 +135,14 @@ export default {
 </script>
 
 <style>
+.logo-title {
+  color: white;
+}
+img {
+  width: 4rem;
+  margin-left: auto;
+  margin-right: auto;
+}
 .p-3 {
   padding: 3rem;
 }
