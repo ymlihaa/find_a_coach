@@ -46,11 +46,33 @@
         </div>
       </v-form>
     </div>
+
     <div
       class="register-second-step"
       v-if="this.$store.state.isActive === true"
     >
       <form-register> </form-register>
+    </div>
+
+    <div class="text-center">
+      <v-dialog v-model="dialog" width="500">
+        <v-card>
+          <v-card-title class="headline grey lighten-2"> Warning </v-card-title>
+
+          <v-card-text>
+            {{ errorMessage }}
+          </v-card-text>
+
+          <v-divider></v-divider>
+
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="primary" text @click="dialog = false">
+              I accept
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </div>
   </div>
 </template>
@@ -70,6 +92,8 @@ export default {
   },
   data() {
     return {
+      errorMessage: "",
+      dialog: false,
       show3: false,
       show4: false,
       formData: {
@@ -109,10 +133,8 @@ export default {
             });
         })
         .catch((error) => {
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          console.log("errorCode : ", errorCode);
-          console.log("errorMessage: ", errorMessage);
+          this.errorMessage = error.message;
+          this.dialog = true;
         });
     },
     reset() {
