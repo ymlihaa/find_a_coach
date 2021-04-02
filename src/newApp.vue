@@ -23,6 +23,7 @@
         ></v-avatar>
 
         <v-btn class="r-link" text color="white">
+          <img class="header-icon" src="./assets/home.svg" alt="" />
           <router-link to="/">Home</router-link>
         </v-btn>
 
@@ -32,6 +33,8 @@
           color="white"
           v-if="!this.$store.state.isActive"
         >
+          <img class="header-icon" src="./assets/login.svg" alt="" />
+
           <router-link to="/login">Log In</router-link>
         </v-btn>
 
@@ -50,10 +53,14 @@
           color="white"
           v-if="this.$store.state.isActive"
         >
+          <img class="header-icon" src="./assets/profile.svg" alt="" />
+
           <router-link to="/profile">Profile</router-link>
         </v-btn>
 
         <v-tab v-if="this.$store.state.isActive !== false">
+          <img class="header-icon" src="./assets/messages.svg" alt="" />
+
           <v-badge color="green" :content="this.$store.state.msgCount">
             <router-link to="/messages">Messages</router-link>
           </v-badge>
@@ -68,6 +75,12 @@
           v-if="this.$store.state.isActive"
         >
           <router-link to="/">Logout</router-link>
+          <img
+            id="logout-icon"
+            class="header-icon"
+            src="./assets/logout.svg"
+            alt=""
+          />
         </v-btn>
       </v-container>
     </v-app-bar>
@@ -135,6 +148,10 @@ export default {
 </script>
 
 <style>
+.header-icon {
+  width: 1.4rem;
+  margin-right: 0.4rem;
+}
 .logo-title {
   color: white;
 }
@@ -159,5 +176,9 @@ a {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+#logout-icon {
+  margin-left: 0.4rem;
 }
 </style>
