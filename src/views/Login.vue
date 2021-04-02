@@ -38,10 +38,37 @@
           </div>
         </div>
       </v-form>
-    </div>
-  </transition>
+
+      <template>
+        <div class="text-center">
+          <v-dialog v-model="dialog" width="500">
+            <v-card>
+              <v-card-title class="headline grey lighten-2">
+                Warning
+              </v-card-title>
+
+              <v-card-text>
+                {{ errorMessage }}
+              </v-card-text>
+
+              <v-divider></v-divider>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="primary" text @click="dialog = false">
+                  I accept
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </div>
+      </template>
+    </div></transition
+  >
 </template>
 
+
+   
 
 
 
@@ -59,6 +86,8 @@ export default {
       password: "",
       valid: true,
       show3: false,
+      errorMessage: "",
+      dialog: false,
     };
   },
   methods: {
@@ -78,7 +107,10 @@ export default {
 
           router.push("/messages");
         })
-        .catch((err) => console.log(err));
+        .catch((error) => {
+          this.errorMessage = error.message;
+          this.dialog = true;
+        });
     },
     reset() {
       this.email = "";
