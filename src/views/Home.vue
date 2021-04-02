@@ -120,9 +120,10 @@ export default {
 
   methods: {
     navigateDetail(uid) {
+      const senderId = this.uid;
       router.push({
         name: "Detail",
-        params: { uid },
+        params: { uid, senderId },
       });
     },
     handleRequest(id) {
@@ -175,9 +176,6 @@ export default {
       );
     },
   },
-  // created() {
-  //   this.uid = this.$store.state.uid;
-  // },
 };
 </script>
 

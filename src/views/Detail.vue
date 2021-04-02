@@ -34,7 +34,9 @@
           </v-card-actions>
         </div>
       </div>
-      <span class="request w-100" @click="handleRequest">request</span>
+      <span v-if="condition()" class="request w-50" @click="handleRequest"
+        >request</span
+      >
     </div>
 
     <request-form
@@ -49,13 +51,13 @@ import { db } from "../firebase";
 import Request from "../components/Request";
 import router from "../router/index";
 export default {
-  props: ["uid"],
+  props: ["uid", "senderId"],
   components: {
     "request-form": Request,
   },
   data() {
     return {
-      id: "",
+      id: this.uid ? this.uid : null,
       isRequest: false,
       userDetail: [],
     };
@@ -66,6 +68,22 @@ export default {
       console.log(this.uid);
       this.$store.commit("isRequest");
       console.log(this.isRequest);
+    },
+  },
+
+  computed: {
+    condition: function () {
+      var vm = this;
+      return function () {
+        console.log("functions : ", vm.uid);
+        console.log("fuıctin:", vm.senderId);
+        if (vm.id !== undefined) {
+          if (vm.id == vm.senderId) {
+            return false;
+          }
+        }
+        return true;
+      };
     },
   },
 
@@ -80,10 +98,6 @@ export default {
     } else {
       router.push("/");
     }
-  },
-
-  created() {
-    this.id = this.uid;
   },
 };
 </script>
