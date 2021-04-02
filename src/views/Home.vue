@@ -107,7 +107,8 @@ export default {
   props: ["firebaseData"],
   data() {
     return {
-      uid: "",
+      uid: this.$store.state.uid ? this.$store.state.uid : null,
+      receiverId: "",
       allCoach: [],
       filterTag: [],
     };
@@ -127,7 +128,7 @@ export default {
     handleRequest(id) {
       console.log(id);
       console.log("clicked");
-      this.uid = id;
+      this.receiverId = id;
       this.$store.commit("isRequest");
     },
   },
@@ -174,9 +175,9 @@ export default {
       );
     },
   },
-  created() {
-    this.uid = this.$store.state.uid;
-  },
+  // created() {
+  //   this.uid = this.$store.state.uid;
+  // },
 };
 </script>
 
