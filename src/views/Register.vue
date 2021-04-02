@@ -9,7 +9,6 @@
         @submit.prevent="registerUser"
       >
         <img src="../assets/login_logo.svg" alt="" />
-
         <div class="w-50">
           <v-text-field
             class="w-100"
@@ -18,7 +17,6 @@
             label="E-mail"
             required
           ></v-text-field>
-
           <v-text-field
             class="input-group--focused w-100"
             v-model="formData.password"
@@ -33,12 +31,10 @@
             label="Password"
             required
           ></v-text-field>
-
           <div class="d-flex-col">
             <v-btn color="primary" class="w-100 mt-3" @click="registerUser">
               Sing Up
             </v-btn>
-
             <v-btn color="error" class="w-100 mt-3" @click="reset">
               Reset Form
             </v-btn>

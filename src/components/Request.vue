@@ -30,17 +30,23 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <success-app v-if="show" :isOk="show"></success-app>
   </v-row>
 </template>
 
 <script>
 import { db } from "../firebase";
-import router from "../router/index";
+// import router from "../router/index";
+import Success from "../components/Success";
 
 export default {
+  components: {
+    "success-app": Success,
+  },
   props: ["uid"],
   data() {
     return {
+      show: false,
       dialog: this.$store.state.isRequest,
       email: "",
       description: "",
@@ -59,9 +65,7 @@ export default {
         })
         .then(() => {
           console.log(this.uid);
-          alert("Mesajınız Gönderildi . ");
-          this.$store.commit("isRequest");
-          router.push("/");
+          this.show = true;
         })
         .catch((err) => {
           console.log(err.message);
