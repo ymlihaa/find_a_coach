@@ -74,7 +74,9 @@
           class="my-2"
           v-if="this.$store.state.isActive"
         >
-          <router-link to="/">Logout</router-link>
+          <!-- <router-link to="/">
+        </router-link> -->
+          Logout
           <img
             id="logout-icon"
             class="header-icon"
@@ -100,6 +102,8 @@
 </template>
 
 <script>
+import router from "./router/index";
+
 export default {
   name: "App",
   data() {
@@ -111,6 +115,7 @@ export default {
     handleLogout() {
       this.$store.commit("updateLogout");
       this.$store.state.msgCount = 0;
+      router.push("/");
     },
   },
   computed: {
