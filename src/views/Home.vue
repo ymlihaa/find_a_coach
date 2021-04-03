@@ -63,7 +63,7 @@
             </v-list-item>
             <v-card
               outlined
-              class="p-1 float-right mr-1"
+              class="p-half float-right mr-1"
               v-for="(tag, index) in item.tags"
               :key="index"
               max-width="72"
@@ -194,7 +194,7 @@ export default {
   margin-right: 0.5rem;
 }
 
-.p-1 {
+.p-half {
   padding: 0.5rem;
   width: auto;
 }
@@ -205,23 +205,9 @@ export default {
 .card {
   margin: 1rem;
 }
-.d-flex {
-  display: flex;
-  align-content: center;
-  justify-content: center;
-}
 
 .tags {
   background-color: red;
   color: white;
-}
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
 }
 </style>

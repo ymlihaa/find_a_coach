@@ -99,37 +99,15 @@ img {
   width: 33%;
 }
 
-.w-100 {
-  width: 100%;
-}
-.w-50 {
-  width: 50%;
-}
 .form {
   min-height: 70vh;
 }
 
-.h-100 {
-  height: 100vh;
-}
 .mt-3 {
   margin-top: 3rem;
 }
 .mt-10 {
   margin-top: auto;
-}
-
-.d-flex {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.d-flex-col {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .fade-enter-active,

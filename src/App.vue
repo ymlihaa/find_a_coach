@@ -150,6 +150,12 @@ export default {
 </script>
 
 <style>
+.mt-1 {
+  margin-top: 1rem;
+}
+.mt-5 {
+  margin-top: 5rem;
+}
 .header-icon {
   width: 1.4rem;
   margin-right: 0.4rem;
@@ -161,6 +167,10 @@ img {
   width: 4rem;
   margin-left: auto;
   margin-right: auto;
+}
+
+.p-2 {
+  padding: 2rem;
 }
 .p-3 {
   padding: 3rem;
@@ -182,5 +192,30 @@ a {
 
 #logout-icon {
   margin-left: 0.4rem;
+}
+.d-flex-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.d-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.w-100 {
+  width: 100%;
+}
+.w-50 {
+  width: 50%;
+}
+.h-100 {
+  height: 100vh;
+}
+
+.mt-3 {
+  margin-top: 3rem;
 }
 </style>

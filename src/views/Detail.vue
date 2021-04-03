@@ -1,29 +1,27 @@
 <template>
-  <div class="detail-wrapper d-flex">
-    <div
-      v-if="this.$store.state.isRequest == false"
-      class="main-container d-flex-col"
-    >
-      <v-avatar color="grey lighten-2" size="128"></v-avatar>
-      <span class="title mt-1"
-        >{{ userDetail[0].firstName }}
-        {{ userDetail[0].lastName }}
-      </span>
-      <!-- 
-      <section class="description mt-5 w-50">
-        {{ userDetail[0].description }}
-      </section> -->
+  <div class="detail-wrapper">
+    <div v-if="this.$store.state.isRequest == false" class="d-flex-col">
+      <div class="img-wrapper d-flex-col">
+        <div>
+          <v-avatar color="grey lighten-2" size="75"></v-avatar>
+        </div>
+        <span class="title mt-1"
+          >{{ userDetail[0].firstName }}
+          {{ userDetail[0].lastName }}
+        </span>
+        <hr />
+      </div>
 
-      <!-- <v-sheet class="mt-1 w-50" min-height="20vh " rounded="lg">
-        {{ userDetail[0].description }}
-      </v-sheet> -->
+      <div class="p-2 card" elevation="1" tile>
+        <strong>Description</strong>
+        <hr class="mt-1" />
+        <div class="mt-4 p-1">
+          <div>{{ userDetail[0].description }}</div>
+        </div>
+        <hr class="mt-1" />
+        <div class="d-flex">
+          <strong>Tags:</strong>
 
-      <v-card class="mt-1 w-100 card" elevation="1" outlined tile>
-        <div>{{ userDetail[0].description }}</div>
-      </v-card>
-
-      <div class="d-flex">
-        <div class="mt-1 d-flex">
           <v-card-actions
             v-for="(tag, index) in userDetail[0].tags"
             :key="index"
@@ -34,9 +32,18 @@
           </v-card-actions>
         </div>
       </div>
-      <span v-if="condition()" class="request w-50" @click="handleRequest"
-        >request</span
-      >
+
+      <div class="w-50 button-wrapper">
+        <v-btn
+          outlined
+          large
+          color="primary"
+          v-if="condition()"
+          class="request-btn w-100"
+          @click="handleRequest"
+          >request</v-btn
+        >
+      </div>
     </div>
 
     <request-form
@@ -103,59 +110,54 @@ export default {
 </script>
 
 <style scoped>
-.w-100 {
-  width: 100%;
-}
-
-.card {
-  min-width: 70vh;
+.img-wrapper {
+  margin-top: 1rem;
+  min-width: auto;
   overflow: auto;
   word-break: break-all;
   white-space: normal;
-  height: 50vh;
-  padding: 3rem;
+  background-color: white;
 }
 
-.d-flex {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.d-flex-col {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.mt-1 {
-  margin-top: 1rem;
-}
-
-.mt-5 {
-  margin-top: 5rem;
+.card {
+  margin-top: 2rem;
+  padding: 1rem;
+  min-width: 50vh;
+  overflow: auto;
+  word-break: break-all;
+  white-space: normal;
+  border: 1px solid #cacaca;
+  border-radius: 0.3rem;
+  background-color: white;
 }
 
 .detail-wrapper {
   max-width: 720px;
-  height: 70vh;
+  min-height: 70vh;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 5rem;
+  margin-top: 3rem;
+  padding: 2rem;
+  border: 1px solid #cacaca;
+  border-radius: 0.5rem;
+  box-shadow: 0px 5px 6px #cacaca;
+  background-color: #fefefe;
 }
 
-.main-container {
-  padding: 2rem;
+.request-btn {
+  margin-top: 6rem;
 }
-.request {
-  float: right;
-  padding: 1rem;
-  border: 1px solid #cacaca;
-  border-radius: 8px;
-  margin: 1rem;
-  background-color: #488fef;
-  color: white;
-  cursor: pointer;
+
+.h-100 {
+  height: 100%;
+}
+
+.button-wrapper {
+  position: relative;
+}
+
+.mt-4 {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
 }
 </style>

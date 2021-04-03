@@ -1,32 +1,5 @@
 <template>
   <v-app id="inspire">
-    <!-- <v-app-bar app color="white" flat>
-      <v-container class="py-0 fill-height">
-        <v-avatar class="mr-10" color="grey darken-1" size="32"></v-avatar>
-
-        <v-btn v-for="link in links" :key="link" text>
-          {{ link }}
-        </v-btn>
-        <v-tab v-if="this.$store.state.isActive !== false">
-          <v-badge color="green" :content="this.$store.state.msgCount">
-            Messages
-          </v-badge>
-        </v-tab>
-
-        <v-spacer></v-spacer>
-
-        <v-responsive max-width="260">
-          <v-text-field
-            dense
-            flat
-            hide-details
-            rounded
-            solo-inverted
-          ></v-text-field>
-        </v-responsive>
-      </v-container>
-    </v-app-bar> -->
-
     <v-main class="grey lighten-3">
       <v-container>
         <v-row>
@@ -34,21 +7,20 @@
             <v-sheet min-height="70vh" rounded="lg">
               <v-row>
                 <v-col>
-                  <div class="main-container d-flex-col">
+                  <div class="p-2 d-flex-col">
                     <v-avatar color="grey lighten-2" size="128"></v-avatar>
                     <span class="title mt-1"
                       >{{ userDetail.firstName }}
                       {{ userDetail.lastName }}
                     </span>
 
-                    <!-- <section class="description mt-5"> -->
                     <v-sheet min-height="30vh" rounded="lg">
                       {{ userDetail.description }}
                     </v-sheet>
 
                     <v-card
                       outlined
-                      class="p-1 mr-1"
+                      class="p-half mr-1"
                       v-for="(tag, index) in userDetail.tags"
                       :key="index"
                       max-width="72"
@@ -71,7 +43,6 @@
 </template>
 
 <script>
-// import { db } from "../firebase";
 import { db } from "../firebase";
 const collectionPath = "users";
 
@@ -95,23 +66,6 @@ export default {
 </script>
 
 <style scoped>
-.d-flex {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.d-flex-col {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.mt-1 {
-  margin-top: 1rem;
-}
-
 .mt-5 {
   margin-top: 5rem;
 }
@@ -120,9 +74,6 @@ export default {
   max-width: 720px;
 }
 
-.main-container {
-  padding: 2rem;
-}
 .request {
   float: right;
   padding: 1rem;
@@ -133,7 +84,7 @@ export default {
   color: white;
   cursor: pointer;
 }
-.p-1 {
+.p-half {
   padding: 0.5rem;
   width: auto;
 }

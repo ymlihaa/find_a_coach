@@ -130,37 +130,12 @@ export default {
 img {
   width: 33%;
 }
-.w-100 {
-  width: 100%;
-}
-.w-50 {
-  width: 50%;
-}
-
-.h-100 {
-  height: 100vh;
-}
 
 .mt-10 {
   margin-top: 10rem;
 }
-.mt-3 {
-  margin-top: 3rem;
-}
 
 .form {
   min-height: 70vh;
-}
-.d-flex {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.d-flex-col {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 </style>
