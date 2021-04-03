@@ -7,7 +7,7 @@
             <v-switch
               v-model="filterTag"
               label="Front End "
-              color="red"
+              color="primary"
               value="frontend"
               hide-details
             ></v-switch>
