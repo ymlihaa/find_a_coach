@@ -1,9 +1,9 @@
 <template>
   <v-row justify="center">
-    <v-dialog v-model="dialog" max-width="290">
+    <v-dialog v-model="dialog" max-width="350">
       <v-card>
         <v-card-title class="headline d-flex">
-          Mesajınız İletildi.
+          {{ dialogMessage }}
         </v-card-title>
 
         <div class="d-flex">
@@ -26,22 +26,29 @@
 
 import router from "../router/index";
 export default {
-  props: ["isOk"],
+  props: ["isOk", "message"],
   data() {
     return {
       dialog: this.isOk,
+      dialogMessage: "Mesajınız Başarıyla iletildi .",
     };
   },
 
   methods: {
     handleOk() {
       this.dialog = false;
-      this.$store.commit("isRequest");
-      router.push("/");
+      console.log("success app current path : ", router.currentRoute.path);
+      if (router.currentRoute.path == "/editProfile") {
+        router.push("/profile");
+      } else {
+        this.$store.commit("isRequest");
+        router.push("/");
+      }
     },
   },
   created() {
     console.log("Success", this.isOk);
+    if (this.message.length > 0) this.dialogMessage = this.message;
   },
 };
 </script>

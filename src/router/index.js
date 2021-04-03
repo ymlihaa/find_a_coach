@@ -67,6 +67,20 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../components/Messages.vue"),
   },
+
+  {
+    path: "/editProfile",
+    name: "EditProfile",
+    beforeEnter: (to, from, next) => {
+      !store.state.isActive ? next({ name: "Login" }) : next();
+    },
+    props: true,
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/editProfile.vue"),
+  },
 ];
 
 const router = new VueRouter({

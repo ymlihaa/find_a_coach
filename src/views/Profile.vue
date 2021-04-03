@@ -7,6 +7,10 @@
             <v-sheet min-height="70vh" rounded="lg">
               <v-row>
                 <v-col>
+                  <v-btn elevation="2" small @click="editProfile"
+                    >Düzenle</v-btn
+                  >
+
                   <div class="p-2 d-flex-col">
                     <v-avatar color="grey lighten-2" size="128"></v-avatar>
                     <span class="title mt-1"
@@ -45,6 +49,7 @@
 <script>
 import { db } from "../firebase";
 const collectionPath = "users";
+import router from "../router/index";
 
 export default {
   data() {
@@ -53,6 +58,16 @@ export default {
       allMessages: [],
       links: ["Home", "Profile", "Logout"],
     };
+  },
+  methods: {
+    editProfile() {
+      router.push({
+        name: "EditProfile",
+        params: {
+          userDetail: this.userDetail,
+        },
+      });
+    },
   },
 
   created() {
