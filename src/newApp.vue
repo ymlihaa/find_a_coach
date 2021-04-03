@@ -92,7 +92,7 @@
         <v-row>
           <v-col>
             <!-- <v-sheet class="p-3" min-height="70vh" rounded="lg"> -->
-            <transition name="fade"> <router-view /> </transition>>
+            <transition name="fade"> <router-view /> </transition>
             <!-- </v-sheet> -->
           </v-col>
         </v-row>
@@ -103,9 +103,9 @@
 
 <script>
 import router from "./router/index";
-
 export default {
   name: "App",
+
   data() {
     return {
       links: ["/", "/login", "/register"],

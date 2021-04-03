@@ -7,7 +7,7 @@ export const store = new Vuex.Store({
   state: {
     uid: null,
     isActive: false,
-    isLoading: true,
+    loading: false,
     isRequest: false,
     msgCount: 0,
     currentUserEmail: "",
@@ -20,10 +20,12 @@ export const store = new Vuex.Store({
       state.currentUserEmail = payload.mail;
     },
     updateLogout(state) {
-      (state.uid = ""), (state.isActive = false);
+      state.uid = null;
+      state.isActive = false;
     },
-    isLoading(state) {
-      state.isLoading = false;
+    showLoading(state, payload) {
+      state.loading = payload.isLoading;
+      console.log("mutations : ", state.loading);
     },
     isRequest(state) {
       state.isRequest = !state.isRequest;
@@ -35,9 +37,11 @@ export const store = new Vuex.Store({
 
   actions: {
     isLoading({ commit }) {
+      commit("showLoading", { isLoading: true });
       setTimeout(() => {
-        commit("isLoading");
-      }, 3000);
+        commit("showLoading", { isLoading: false });
+        console.log("over progress");
+      }, 1000);
     },
   },
 });

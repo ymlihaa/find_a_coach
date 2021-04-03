@@ -28,61 +28,65 @@
               hide-details
             ></v-switch> </v-card-actions
         ></v-card>
-        <v-card
-          class="mx-auto card"
-          max-width="650"
-          outlined
-          v-for="item in allCoach"
-          :key="item.id"
-        >
-          <v-list-item three-line>
-            <v-list-item-content>
-              <v-list-item-title class="headline mb-1">
-                {{ item.firstName }}
-                {{ item.lastName }}
-              </v-list-item-title>
-              <v-list-item-subtitle>
-                {{ item.description }}
-              </v-list-item-subtitle>
-              <v-list-item-subtitle>
-                {{ item.hourlyRate | addMoney }}
-              </v-list-item-subtitle>
-            </v-list-item-content>
 
-            <v-list-item-avatar
-              class="avatar"
-              tile
-              size="80"
-              color="grey"
-              max-width="80"
-            >
-            </v-list-item-avatar>
-          </v-list-item>
+        <progress-bar></progress-bar>
+        <div v-show="this.$store.state.loading == false">
           <v-card
+            class="mx-auto card"
+            max-width="650"
             outlined
-            class="p-1 float-right mr-1"
-            v-for="(tag, index) in item.tags"
-            :key="index"
-            max-width="72"
+            v-for="item in allCoach"
+            :key="item.id"
           >
-            <v-list-item-subtitle class="mt-1"
-              ><strong>{{ tag }}</strong></v-list-item-subtitle
+            <v-list-item three-line>
+              <v-list-item-content>
+                <v-list-item-title class="headline mb-1">
+                  {{ item.firstName }}
+                  {{ item.lastName }}
+                </v-list-item-title>
+                <v-list-item-subtitle>
+                  {{ item.description }}
+                </v-list-item-subtitle>
+                <v-list-item-subtitle>
+                  {{ item.hourlyRate | addMoney }}
+                </v-list-item-subtitle>
+              </v-list-item-content>
+
+              <v-list-item-avatar
+                class="avatar"
+                tile
+                size="80"
+                color="grey"
+                max-width="80"
+              >
+              </v-list-item-avatar>
+            </v-list-item>
+            <v-card
+              outlined
+              class="p-1 float-right mr-1"
+              v-for="(tag, index) in item.tags"
+              :key="index"
+              max-width="72"
             >
+              <v-list-item-subtitle class="mt-1"
+                ><strong>{{ tag }}</strong></v-list-item-subtitle
+              >
+            </v-card>
+            <v-card-actions>
+              <v-btn
+                v-if="condition(item.id)"
+                rounded
+                text
+                @click="handleRequest(item.id)"
+              >
+                Contact
+              </v-btn>
+              <v-btn @click="navigateDetail(item.id)" outlined rounded text>
+                View Details
+              </v-btn>
+            </v-card-actions>
           </v-card>
-          <v-card-actions>
-            <v-btn
-              v-if="condition(item.id)"
-              rounded
-              text
-              @click="handleRequest(item.id)"
-            >
-              Contact
-            </v-btn>
-            <v-btn @click="navigateDetail(item.id)" outlined rounded text>
-              View Details
-            </v-btn>
-          </v-card-actions>
-        </v-card>
+        </div>
       </div>
       <div v-if="this.$store.state.isRequest === true">
         <request-form :uid="receiverId"></request-form>
@@ -99,10 +103,12 @@ import { db } from "../firebase";
 const collectionPath = "users";
 import router from "../router/index";
 import Request from "../components/Request";
+import Progress from "../components/Progress";
 export default {
   name: "Home",
   components: {
     "request-form": Request,
+    "progress-bar": Progress,
   },
   props: ["firebaseData"],
   data() {
