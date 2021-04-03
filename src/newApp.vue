@@ -115,7 +115,10 @@ export default {
     handleLogout() {
       this.$store.commit("updateLogout");
       this.$store.state.msgCount = 0;
-      router.push("/");
+      console.log("current Route : ", router.currentRoute.path);
+      router.currentRoute.path === "/"
+        ? window.location.reload()
+        : router.push("/");
     },
   },
   computed: {
