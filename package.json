@@ -6,11 +6,12 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "start":"node server.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "animate.css": "^4.1.1",
     "axios": "^0.21.1",
+    "connect-history-api-fallback": "^1.6.0",
     "core-js": "^3.6.5",
     "debounce": "^1.2.1",
     "express": "^4.17.1",
