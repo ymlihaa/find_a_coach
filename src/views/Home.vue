@@ -179,7 +179,9 @@ export default {
               ? ["frontend", "backend", "career"]
               : this.filterTag
           )
-      );
+      ).then(() => {
+        this.$store.dispatch("isLoading");
+      });
     },
   },
 };

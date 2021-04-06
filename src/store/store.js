@@ -41,7 +41,7 @@ export const store = new Vuex.Store({
       setTimeout(() => {
         commit("showLoading", { isLoading: false });
         console.log("over progress");
-      }, 1100);
+      }, 500);
     },
   },
 });
