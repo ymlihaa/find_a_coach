@@ -1,98 +1,64 @@
 <template>
-  <v-app id="inspire">
-    <v-app-bar app color="blue" flat>
-      <v-container class="py-0 fill-height">
-        <img src="./assets/login_logo.svg" alt="" />
-        <h2 class="logo-title">Find a Coach</h2>
-        <v-spacer></v-spacer>
-
-        <v-avatar
-          v-if="this.$store.state.isActive"
-          class="mr-10"
-          color="grey darken-1"
-          size="32"
-        ></v-avatar>
-
-        <router-link to="/">
-          <v-btn class="r-link" text color="white">
-            <img class="header-icon" src="./assets/home.svg" alt="" />
-            home
-          </v-btn>
-        </router-link>
-        <router-link to="/login">
-          <v-btn
-            class="r-link"
-            text
-            color="white"
-            v-if="!this.$store.state.isActive"
-          >
-            <img class="header-icon" src="./assets/login.svg" alt="" />
-
-            Log In
-          </v-btn>
-        </router-link>
-        <router-link to="/register">
-          <v-btn
-            class="r-link"
-            text
-            color="white"
-            v-if="!this.$store.state.isActive"
-          >
-            Sign Up
-          </v-btn>
-        </router-link>
-
-        <router-link to="/profile">
-          <v-btn
-            class="r-link"
-            text
-            color="white"
-            v-if="this.$store.state.isActive"
-          >
-            <img class="header-icon" src="./assets/profile.svg" alt="" />
-
-            Profile
-          </v-btn>
-        </router-link>
-        <router-link to="/messages">
-          <v-tab v-if="this.$store.state.isActive !== false">
-            <img class="header-icon" src="./assets/messages.svg" alt="" />
-
-            <v-badge color="green" :content="this.$store.state.msgCount">
-              Messages
-            </v-badge>
-          </v-tab>
-        </router-link>
-
-        <v-btn
-          @click="handleLogout"
-          color="white"
-          text
-          rounded
-          class="my-2"
-          v-if="this.$store.state.isActive"
+  <el-container>
+    <el-header type="flex">
+      <el-menu
+        :default-active="activeIndex"
+        mode="horizontal"
+        @select="handleSelect"
+      >
+        <el-menu-item index="1">
+          <router-link to="/">
+            <el-button size="small">
+              <img src="./assets/home.svg" alt="" /> Home
+            </el-button>
+          </router-link>
+        </el-menu-item>
+        <el-menu-item index="2" v-if="this.$store.state.isActive">
+          <router-link to="/profile">
+            <el-button size="small">
+              <img src="./assets/profile.svg" alt="" />Profile</el-button
+            >
+          </router-link>
+        </el-menu-item>
+        <el-menu-item index="3" v-if="!this.$store.state.isActive">
+          <router-link to="/login">
+            <el-button size="small">
+              <img src="./assets/login.svg" alt="" />
+              Login</el-button
+            >
+          </router-link>
+        </el-menu-item>
+        <el-menu-item index="4" v-if="!this.$store.state.isActive">
+          <router-link to="/register">
+            <el-button size="small">Sign Up</el-button>
+          </router-link>
+        </el-menu-item>
+        <el-menu-item index="5" v-if="this.$store.state.isActive">
+          <el-container>
+            <el-badge :value="this.$store.state.msgCount">
+              <router-link to="/messages">
+                <el-button size="small">Messages</el-button>
+              </router-link>
+            </el-badge>
+          </el-container></el-menu-item
         >
-          Logout
-          <img
-            id="logout-icon"
-            class="header-icon"
-            src="./assets/logout.svg"
-            alt=""
-          />
-        </v-btn>
-      </v-container>
-    </v-app-bar>
-
-    <v-main class="grey lighten-3">
-      <v-container>
-        <v-row>
-          <v-col>
-            <transition name="fade"> <router-view /> </transition>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-main>
-  </v-app>
+        <el-menu-item index="6" v-if="this.$store.state.isActive"
+          ><el-button size="small" @click="handleLogout">
+            <img
+              id="logout-icon"
+              class="header-icon"
+              src="./assets/logout.svg"
+              alt=""
+            />
+            Log Out</el-button
+          ></el-menu-item
+        >
+      </el-menu>
+    </el-header>
+    <el-main>
+      <router-view />
+    </el-main>
+  </el-container>
 </template>
 
 <script>
@@ -102,6 +68,7 @@ export default {
 
   data() {
     return {
+      activeIndex: "1",
       links: ["/", "/login", "/register"],
     };
   },
@@ -115,107 +82,16 @@ export default {
         : router.push("/");
     },
   },
-  computed: {
-    checkRoute: function (value) {
-      if (this.$store.state.isActive) {
-        if (value == "/" || value == "/profile") {
-          return true;
-        }
-      }
-      return true;
-    },
-  },
-
-  filters: {
-    setRoute: function (value) {
-      let route = value;
-      switch (route) {
-        case "/":
-          route = "Home";
-          break;
-        case "/profile":
-          route = "Profile";
-          break;
-        case "/register":
-          route = "Sign Up";
-          break;
-        case "/login":
-          route = "Login";
-          break;
-      }
-      return route;
-    },
-  },
 };
 </script>
 
-<style>
-.mt-1 {
-  margin-top: 1rem;
-}
-.mt-5 {
-  margin-top: 5rem;
-}
-.header-icon {
-  width: 1.4rem;
-  margin-right: 0.4rem;
-}
-.logo-title {
-  color: white;
-}
+<style >
 img {
-  width: 4rem;
-  margin-left: auto;
-  margin-right: auto;
+  width: 1rem;
 }
-
-.p-2 {
-  padding: 2rem;
-}
-.p-3 {
-  padding: 3rem;
-}
-
-a {
-  text-decoration: none;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-
-#logout-icon {
-  margin-left: 0.4rem;
-}
-.d-flex-col {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.d-flex {
+.el-menu {
   display: flex;
   align-items: center;
-  justify-content: center;
-}
-
-.w-100 {
-  width: 100%;
-}
-.w-50 {
-  width: 50%;
-}
-.h-100 {
-  height: 100vh;
-}
-
-.mt-3 {
-  margin-top: 3rem;
+  justify-content: flex-end;
 }
 </style>
