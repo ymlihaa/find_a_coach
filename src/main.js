@@ -7,6 +7,10 @@ import { store } from "./store/store";
 import VueEllipseProgress from "vue-ellipse-progress";
 import vuetify from "./plugins/vuetify";
 import nApp from "./App.vue";
+import ElementUI from "element-ui";
+import "element-ui/lib/theme-chalk/index.css";
+
+Vue.use(ElementUI);
 
 Vue.use(firestorePlugin);
 Vue.use(VueAxios, axios);
