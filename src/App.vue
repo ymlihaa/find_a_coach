@@ -56,7 +56,12 @@
       </el-menu>
     </el-header>
     <el-main>
-      <router-view />
+      <transition
+        mode="out-in"
+        enter-active-class="animate__animated animate__fadeIn"
+      >
+        <router-view />
+      </transition>
     </el-main>
   </el-container>
 </template>

@@ -1,98 +1,96 @@
 <template>
-  <transition name="fade">
-    <div class="home">
-      <div v-if="this.$store.state.isRequest == false">
-        <v-card class="mx-auto card" max-width="650" outlined>
-          <v-card-actions class="d-flex">
-            <v-switch
-              v-model="filterTag"
-              label="Front End "
-              color="primary"
-              value="frontend"
-              hide-details
-            ></v-switch>
+  <div class="home">
+    <div v-if="this.$store.state.isRequest == false">
+      <v-card class="mx-auto card" max-width="650" outlined>
+        <v-card-actions class="d-flex">
+          <v-switch
+            v-model="filterTag"
+            label="Front End "
+            color="primary"
+            value="frontend"
+            hide-details
+          ></v-switch>
 
-            <v-switch
-              v-model="filterTag"
-              label="Back End "
-              color="primary"
-              value="backend"
-              hide-details
-            ></v-switch>
+          <v-switch
+            v-model="filterTag"
+            label="Back End "
+            color="primary"
+            value="backend"
+            hide-details
+          ></v-switch>
 
-            <v-switch
-              v-model="filterTag"
-              label="Career "
-              color="primary"
-              value="career"
-              hide-details
-            ></v-switch> </v-card-actions
-        ></v-card>
+          <v-switch
+            v-model="filterTag"
+            label="Career "
+            color="primary"
+            value="career"
+            hide-details
+          ></v-switch> </v-card-actions
+      ></v-card>
 
-        <progress-bar></progress-bar>
-        <div v-show="this.$store.state.loading == false">
-          <v-card
-            class="mx-auto card"
-            max-width="650"
-            outlined
-            v-for="item in allCoach"
-            :key="item.id"
-          >
-            <v-list-item three-line>
-              <v-list-item-content>
-                <v-list-item-title class="headline mb-1">
-                  {{ item.firstName }}
-                  {{ item.lastName }}
-                </v-list-item-title>
-                <v-list-item-subtitle>
-                  {{ item.description }}
-                </v-list-item-subtitle>
-                <v-list-item-subtitle>
-                  {{ item.hourlyRate | addMoney }}
-                </v-list-item-subtitle>
-              </v-list-item-content>
+      <progress-bar></progress-bar>
+      <div v-show="this.$store.state.loading == false">
+        <v-card
+          class="mx-auto card"
+          max-width="650"
+          outlined
+          v-for="item in allCoach"
+          :key="item.id"
+        >
+          <v-list-item three-line>
+            <v-list-item-content>
+              <v-list-item-title class="headline mb-1">
+                {{ item.firstName }}
+                {{ item.lastName }}
+              </v-list-item-title>
+              <v-list-item-subtitle>
+                {{ item.description }}
+              </v-list-item-subtitle>
+              <v-list-item-subtitle>
+                {{ item.hourlyRate | addMoney }}
+              </v-list-item-subtitle>
+            </v-list-item-content>
 
-              <v-list-item-avatar
-                class="avatar"
-                tile
-                size="80"
-                color="grey"
-                max-width="80"
-              >
-              </v-list-item-avatar>
-            </v-list-item>
-            <v-card
-              outlined
-              class="p-half float-right mr-1"
-              v-for="(tag, index) in item.tags"
-              :key="index"
-              max-width="72"
+            <v-list-item-avatar
+              class="avatar"
+              tile
+              size="80"
+              color="grey"
+              max-width="80"
             >
-              <v-list-item-subtitle class="mt-1"
-                ><strong>{{ tag }}</strong></v-list-item-subtitle
-              >
-            </v-card>
-            <v-card-actions>
-              <v-btn
-                v-if="condition(item.id)"
-                rounded
-                text
-                @click="handleRequest(item.id)"
-              >
-                Contact
-              </v-btn>
-              <v-btn @click="navigateDetail(item.id)" outlined rounded text>
-                View Details
-              </v-btn>
-            </v-card-actions>
+            </v-list-item-avatar>
+          </v-list-item>
+          <v-card
+            outlined
+            class="p-half float-right mr-1"
+            v-for="(tag, index) in item.tags"
+            :key="index"
+            max-width="72"
+          >
+            <v-list-item-subtitle class="mt-1"
+              ><strong>{{ tag }}</strong></v-list-item-subtitle
+            >
           </v-card>
-        </div>
-      </div>
-      <div v-if="this.$store.state.isRequest === true">
-        <request-form :uid="receiverId"></request-form>
+          <v-card-actions>
+            <v-btn
+              v-if="condition(item.id)"
+              rounded
+              text
+              @click="handleRequest(item.id)"
+            >
+              Contact
+            </v-btn>
+            <v-btn @click="navigateDetail(item.id)" outlined rounded text>
+              View Details
+            </v-btn>
+          </v-card-actions>
+        </v-card>
       </div>
     </div>
-  </transition>
+    <div v-if="this.$store.state.isRequest === true">
+      <request-form :uid="receiverId"></request-form>
+    </div>
+  </div>
 </template>
   
 

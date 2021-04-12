@@ -9,8 +9,11 @@ import vuetify from "./plugins/vuetify";
 import nApp from "./App.vue";
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
+import AnimatedVue from "animated-vue";
+import "animate.css/animate.css";
 
 Vue.use(ElementUI);
+Vue.use(AnimatedVue);
 
 Vue.use(firestorePlugin);
 Vue.use(VueAxios, axios);
@@ -19,6 +22,7 @@ Vue.config.productionTip = false;
 
 new Vue({
   store,
+  AnimatedVue,
   router,
   vuetify,
   render: (h) => h(nApp),
