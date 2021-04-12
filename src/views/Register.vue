@@ -1,7 +1,7 @@
 <template >
   <el-container type="flex">
     <el-main>
-      <el-form align="center" v-if="this.$store.state.isActive === true">
+      <el-form align="center" v-if="this.$store.state.isActive === false">
         <el-form-item label="E-mail" prop="email">
           <el-input type="email" v-model="formData.email"></el-input>
         </el-form-item>
@@ -20,7 +20,7 @@
         </el-form-item>
       </el-form>
     </el-main>
-    <form-register v-if="this.$store.state.isActive === false"></form-register>
+    <form-register v-if="this.$store.state.isActive === true"></form-register>
     <dialog-app
       v-if="this.$store.state.dialog"
       :dialogMessage="errorMessage"
@@ -46,7 +46,6 @@ export default {
   data() {
     return {
       errorMessage: "",
-
       formData: {
         email: "",
         password: "",
@@ -100,6 +99,6 @@ export default {
   justify-content: center;
 }
 .el-form {
-  width: 80vmin;
+  width: 50vmin;
 }
 </style>

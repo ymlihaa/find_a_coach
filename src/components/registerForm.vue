@@ -1,74 +1,32 @@
 <template>
-  <div class="w-100 d-flex">
-    <v-form
-      class="w-50 d-flex-col mt-10"
-      ref="form"
-      lazy-validation
-      outlined
-      @submit.prevent="registerUser"
-    >
-      <v-text-field
-        class="w-50"
-        v-model="firstName"
-        :counter="10"
-        label="First Name"
-        required
-      ></v-text-field>
-
-      <v-text-field
-        class="input-group--focused w-50"
-        v-model="lastName"
-        label="Last Name"
-        required
-      ></v-text-field>
-
-      <v-textarea v-model="description" color="teal" class="w-50">
-        <template v-slot:label>
-          <div>Description <small>(optional)</small></div>
-        </template>
-      </v-textarea>
-
-      <v-text-field
-        class="input-group--focused w-50"
-        label="Hourly Rate"
-        v-model="hourlyRate"
-        required
-      ></v-text-field>
-      <div class="selectBoxs d-flex">
-        <v-switch
-          class="mr-4"
-          v-model="tags"
-          label="Front End"
-          color="primary"
-          value="frontend"
-          hide-details
-        ></v-switch>
-        <v-switch
-          class="mr-4"
-          v-model="tags"
-          label="Back End "
-          color="primary"
-          value="backend"
-          hide-details
-        ></v-switch>
-        <v-switch
-          v-model="tags"
-          label="Career"
-          class="mr-4"
-          color="primary"
-          value="career"
-          hide-details
-        ></v-switch>
-      </div>
-      <div class="d-flex mt-10">
-        <v-btn color="success" class="mr-4" @click="handleSave">
-          Sing Up
-        </v-btn>
-
-        <v-btn color="error" class="mr-4"> Reset Form </v-btn>
-      </div>
-    </v-form>
-  </div>
+  <el-container type="flex">
+    <el-main align="center">
+      <el-form>
+        <el-form-item label="First Name">
+          <el-input v-model="firstName" type="text"></el-input>
+        </el-form-item>
+        <el-form-item label="Last Name">
+          <el-input type="text" v-model="lastName"></el-input>
+        </el-form-item>
+        <el-form-item label="Description">
+          <el-input type="textarea" v-model="description"></el-input>
+        </el-form-item>
+        <el-form-item label="Hourly Rate">
+          <el-input type="text" v-model="hourlyRate"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-checkbox-group v-model="tags">
+            <el-checkbox label="frontend "></el-checkbox>
+            <el-checkbox label="backend"></el-checkbox>
+            <el-checkbox label="career"></el-checkbox>
+          </el-checkbox-group>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="handleSave">Save</el-button>
+        </el-form-item>
+      </el-form>
+    </el-main>
+  </el-container>
 </template>
 
 
@@ -86,6 +44,9 @@ export default {
       description: "",
       hourlyRate: "",
       tags: [],
+      val1: "",
+      val2: "",
+      val3: "",
     };
   },
   methods: {
@@ -106,38 +67,21 @@ export default {
         .catch((err) => console.log(err.message));
     },
   },
+  updated() {
+    console.log(this.tags);
+  },
 };
 </script>
 
 <style scoped>
-.w-100 {
-  width: 100%;
-}
-.w-50 {
-  width: 50%;
-}
-
-.h-100 {
-  height: 100vh;
-}
-
-.mt-10 {
-  margin-top: auto;
-}
-
-.d-flex {
+.el-main {
   display: flex;
   align-items: center;
-  justify-content: center;
 }
-
-.d-flex-col {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.el-form {
+  width: 50vmin;
 }
-.selectBoxs {
+.el-button {
   width: 100%;
 }
 </style>

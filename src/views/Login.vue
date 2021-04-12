@@ -82,6 +82,6 @@ export default {
 }
 
 .el-form {
-  width: 80vmin;
+  width: 50vmin;
 }
 </style>
