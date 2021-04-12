@@ -1,59 +1,31 @@
 <template >
-  <div>
-    <div class="w-100 d-flex" v-if="this.$store.state.isActive === false">
-      <v-form
-        class="form w-50 d-flex-col mt-10"
-        ref="form"
-        lazy-validation
-        outlined
-        @submit.prevent="registerUser"
-      >
-        <img src="../assets/login_logo.svg" alt="" />
-        <div class="w-50">
-          <v-text-field
-            class="w-100"
-            v-model="formData.email"
-            :counter="10"
-            label="E-mail"
-            required
-          ></v-text-field>
-          <v-text-field
-            class="input-group--focused w-100"
-            v-model="formData.password"
-            :type="show3 ? 'text' : 'password'"
-            label="Password"
-            required
-          ></v-text-field>
-          <v-text-field
-            class="input-group--focused w-100"
+  <el-container type="flex">
+    <el-main>
+      <el-form align="center" v-if="this.$store.state.isActive === true">
+        <el-form-item label="E-mail" prop="email">
+          <el-input type="email" v-model="formData.email"></el-input>
+        </el-form-item>
+        <el-form-item label="Password">
+          <el-input type="password" v-model="formData.password"></el-input>
+        </el-form-item>
+        <el-form-item label="Confirm Password">
+          <el-input
+            type="password"
             v-model="formData.confirmPassword"
-            :type="show4 ? 'text' : 'password'"
-            label="Password"
-            required
-          ></v-text-field>
-          <div class="d-flex-col">
-            <v-btn color="primary" class="w-100 mt-3" @click="registerUser">
-              Sing Up
-            </v-btn>
-            <v-btn color="error" class="w-100 mt-3" @click="reset">
-              Reset Form
-            </v-btn>
-          </div>
-        </div>
-      </v-form>
-    </div>
-
-    <div
-      class="register-second-step"
-      v-if="this.$store.state.isActive === true"
-    >
-      <form-register> </form-register>
-    </div>
+          ></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="registerUser">Sing Up</el-button>
+          <el-button type="danger" @click="reset">Reset</el-button>
+        </el-form-item>
+      </el-form>
+    </el-main>
+    <form-register v-if="this.$store.state.isActive === false"></form-register>
     <dialog-app
       v-if="this.$store.state.dialog"
       :dialogMessage="errorMessage"
     ></dialog-app>
-  </div>
+  </el-container>
 </template>
 
 
@@ -74,16 +46,11 @@ export default {
   data() {
     return {
       errorMessage: "",
-      show3: false,
-      show4: false,
+
       formData: {
         email: "",
         password: "",
         confirmPassword: "",
-      },
-      rules: {
-        required: (value) => !!value || "Required.",
-        min: (v) => v.length >= 8 || "Min 8 characters",
       },
     };
   },
@@ -127,15 +94,12 @@ export default {
 </script>
 
 <style scoped>
-img {
-  width: 33%;
+.el-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
-.mt-10 {
-  margin-top: 10rem;
-}
-
-.form {
-  min-height: 70vh;
+.el-form {
+  width: 80vmin;
 }
 </style>
