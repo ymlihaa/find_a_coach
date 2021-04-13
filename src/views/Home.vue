@@ -1,96 +1,47 @@
 <template>
-  <div class="home">
-    <div v-if="this.$store.state.isRequest == false">
-      <v-card class="mx-auto card" max-width="650" outlined>
-        <v-card-actions class="d-flex">
-          <v-switch
-            v-model="filterTag"
-            label="Front End "
-            color="primary"
-            value="frontend"
-            hide-details
-          ></v-switch>
+  <el-container type="flex">
+    <el-header>
+      <el-card>
+        <el-checkbox-group v-model="filterTag">
+          <el-checkbox label="frontend"> </el-checkbox>
+          <el-checkbox label="backend"> </el-checkbox>
+          <el-checkbox label="career"> </el-checkbox>
+        </el-checkbox-group>
+      </el-card>
+    </el-header>
 
-          <v-switch
-            v-model="filterTag"
-            label="Back End "
-            color="primary"
-            value="backend"
-            hide-details
-          ></v-switch>
-
-          <v-switch
-            v-model="filterTag"
-            label="Career "
-            color="primary"
-            value="career"
-            hide-details
-          ></v-switch> </v-card-actions
-      ></v-card>
-
-      <progress-bar></progress-bar>
-      <div v-show="this.$store.state.loading == false">
-        <v-card
-          class="mx-auto card"
-          max-width="650"
-          outlined
-          v-for="item in allCoach"
-          :key="item.id"
-        >
-          <v-list-item three-line>
-            <v-list-item-content>
-              <v-list-item-title class="headline mb-1">
-                {{ item.firstName }}
-                {{ item.lastName }}
-              </v-list-item-title>
-              <v-list-item-subtitle>
-                {{ item.description }}
-              </v-list-item-subtitle>
-              <v-list-item-subtitle>
-                {{ item.hourlyRate | addMoney }}
-              </v-list-item-subtitle>
-            </v-list-item-content>
-
-            <v-list-item-avatar
-              class="avatar"
-              tile
-              size="80"
-              color="grey"
-              max-width="80"
+    <el-main
+      v-show="this.$store.state.loading == false"
+      v-if="this.$store.state.isRequest == false"
+    >
+      <el-card v-for="item in allCoach" :key="item.id" class="item-box">
+        <el-row :gutter="20">
+          <el-col :span="20"> {{ item.firstName }} {{ item.lastName }} </el-col>
+        </el-row>
+        <el-row :gutter="5" class="el-description">
+          <el-col> {{ item.description }} </el-col>
+        </el-row>
+        <el-row :gutter="5">
+          <el-col :span="19" class="hourlyRate">
+            <el-tag type="danger">{{ item.hourlyRate | addMoney }}</el-tag>
+            <el-tag v-for="(tag, index) in item.tags" :key="index">
+              {{ tag }}
+            </el-tag>
+          </el-col>
+          <el-col class="buttons" :span="5">
+            <el-button v-if="condition(item.id)" @click="handleRequest(item.id)"
+              >Contact</el-button
             >
-            </v-list-item-avatar>
-          </v-list-item>
-          <v-card
-            outlined
-            class="p-half float-right mr-1"
-            v-for="(tag, index) in item.tags"
-            :key="index"
-            max-width="72"
-          >
-            <v-list-item-subtitle class="mt-1"
-              ><strong>{{ tag }}</strong></v-list-item-subtitle
-            >
-          </v-card>
-          <v-card-actions>
-            <v-btn
-              v-if="condition(item.id)"
-              rounded
-              text
-              @click="handleRequest(item.id)"
-            >
-              Contact
-            </v-btn>
-            <v-btn @click="navigateDetail(item.id)" outlined rounded text>
-              View Details
-            </v-btn>
-          </v-card-actions>
-        </v-card>
+            <el-button @click="navigateDetail(item.id)">View Detail</el-button>
+          </el-col>
+        </el-row>
+      </el-card>
+      <div v-if="this.$store.state.isRequest === true">
+        <request-form :uid="receiverId"></request-form>
       </div>
-    </div>
-    <div v-if="this.$store.state.isRequest === true">
-      <request-form :uid="receiverId"></request-form>
-    </div>
-  </div>
+    </el-main>
+    <progress-bar></progress-bar>
+  </el-container>
 </template>
   
 
@@ -186,28 +137,49 @@ export default {
 </script>
 
 <style scoped>
-.avatar {
-  width: 50px;
+.el-header {
+  width: 120vmin;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.mr-1 {
-  margin-right: 0.5rem;
+.el-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-.p-half {
-  padding: 0.5rem;
-  width: auto;
+.el-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.el-description {
+  padding: 1rem;
+  height: 7rem;
+  overflow-y: hidden;
+  text-overflow: clip;
 }
 
-.tag-card {
-  width: 5rem;
-}
-.card {
+.item-box {
+  width: 120vmin;
+  height: 15rem;
   margin: 1rem;
 }
 
-.tags {
-  background-color: red;
-  color: white;
+.el-tag {
+  margin-top: 1rem;
+  margin-right: 0.5rem;
+}
+.hourlyRate {
+  font-weight: 500;
+}
+.buttons {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 </style>
