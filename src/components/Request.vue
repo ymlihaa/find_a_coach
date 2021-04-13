@@ -1,52 +1,36 @@
 <template>
-  <v-row justify="center">
-    <v-dialog v-model="dialog" persistent max-width="600px">
-      <v-card>
-        <v-card-title>
-          <v-text-field
-            class="input-group--focused w-50"
-            v-model="lastName"
-            label="Your E-mail"
-            required
-          ></v-text-field>
-        </v-card-title>
-        <v-card-text>
-          <v-container>
-            <v-row>
-              <v-textarea v-model="description" color="teal" class="w-50">
-                <template v-slot:label>
-                  <div>Your Message</div>
-                </template>
-              </v-textarea>
-            </v-row>
-          </v-container>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="handleCancel">
-            Close
-          </v-btn>
-          <v-btn color="blue darken-1" text @click="sendRequest"> Send </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-    <success-app v-if="show" :isOk="show"></success-app>
-  </v-row>
+  <el-dialog
+    title="Send a message ."
+    :visible.sync="dialog"
+    width="50%"
+    :before-close="handleCancel"
+  >
+    <el-form>
+      <el-form-item label="Your E-mail">
+        <el-input type="email" v-model="email"></el-input>
+      </el-form-item>
+      <el-form-item label="Your Message">
+        <el-input type="textarea" v-model="description"></el-input>
+      </el-form-item>
+      <el-form-item class="buttons">
+        <el-button type="success" @click="sendRequest">Send</el-button>
+      </el-form-item>
+    </el-form>
+  </el-dialog>
 </template>
 
 <script>
 import { db } from "../firebase";
 // import router from "../router/index";
-import Success from "../components/Success";
+// import Success from "../components/Success";
 
 export default {
   components: {
-    "success-app": Success,
+    // "success-app": Success,
   },
   props: ["uid"],
   data() {
     return {
-      show: false,
       dialog: this.$store.state.isRequest,
       email: "",
       description: "",
@@ -66,6 +50,7 @@ export default {
         .then(() => {
           console.log(this.uid);
           this.show = true;
+          this.$store.commit("isRequest");
         })
         .catch((err) => {
           console.log(err.message);
@@ -91,61 +76,9 @@ export default {
 </script>
 
 <style  scoped>
-.w-100 {
-  width: 100%;
-}
-.d-flex {
+.buttons {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-.float-l {
-  position: relative;
-  float: right;
-}
-
-.d-flex-col {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.mt-1 {
-  margin-top: 1rem;
-}
-
-.mt-5 {
-  margin-top: 5rem;
-}
-
-.detail-wrapper {
-  padding: 3rem;
-  max-width: 720px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 5rem;
-  border: 1px solid #cacaca;
-  border-radius: 1rem;
-  box-shadow: 0px 12px 12px #cacaca;
-}
-
-.main-container {
-  padding: 2rem;
-}
-.request,
-.cancel {
-  padding: 1rem;
-  border: 1px solid #cacaca;
-  border-radius: 8px;
-  margin: 1rem;
-  background-color: #488fef;
-  color: white;
-  cursor: pointer;
-}
-.cancel {
-  background-color: red;
-  padding: 0.5rem;
-  width: 3rem;
 }
 </style>

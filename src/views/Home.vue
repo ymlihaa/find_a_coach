@@ -10,10 +10,7 @@
       </el-card>
     </el-header>
 
-    <el-main
-      v-show="this.$store.state.loading == false"
-      v-if="this.$store.state.isRequest == false"
-    >
+    <el-main v-show="this.$store.state.loading == false">
       <el-card v-for="item in allCoach" :key="item.id" class="item-box">
         <el-row :gutter="20">
           <el-col :span="20"> {{ item.firstName }} {{ item.lastName }} </el-col>
@@ -36,9 +33,10 @@
           </el-col>
         </el-row>
       </el-card>
-      <div v-if="this.$store.state.isRequest === true">
-        <request-form :uid="receiverId"></request-form>
-      </div>
+      <request-form
+        v-if="this.$store.state.isRequest == true"
+        :uid="receiverId"
+      ></request-form>
     </el-main>
     <progress-bar></progress-bar>
   </el-container>
