@@ -1,55 +1,45 @@
 <template>
-  <div class="detail-wrapper">
-    <div v-if="this.$store.state.isRequest == false" class="d-flex-col">
-      <div class="img-wrapper d-flex-col">
-        <div>
-          <v-avatar color="grey lighten-2" size="75"></v-avatar>
-        </div>
-        <span class="title mt-1"
-          >{{ userDetail[0].firstName }}
-          {{ userDetail[0].lastName }}
-        </span>
-        <hr />
-      </div>
+  <div>
+    <el-page-header @back="goBack" title="Back"> </el-page-header>
 
-      <div class="p-2 card" elevation="1" tile>
-        <strong>Description</strong>
-        <hr class="mt-1" />
-        <div class="mt-4 p-1">
-          <div>{{ userDetail[0].description }}</div>
-        </div>
-        <hr class="mt-1" />
-        <div class="d-flex">
-          <strong>Tags:</strong>
+    <el-container>
+      <el-header>
+        <h1>{{ userDetail[0].firstName }} {{ userDetail[0].lastName }}</h1>
+      </el-header>
+      <el-main>
+        <el-card>
+          <el-row>
+            <el-col> <h1>Description</h1></el-col>
+          </el-row>
+          <el-divider></el-divider>
+          <el-row>
+            <el-col>{{ userDetail[0].description }}</el-col>
+          </el-row>
+        </el-card>
 
-          <v-card-actions
-            v-for="(tag, index) in userDetail[0].tags"
-            :key="index"
-          >
-            <v-btn outlined rounded text>
-              {{ tag }}
-            </v-btn>
-          </v-card-actions>
-        </div>
-      </div>
-
-      <div class="w-50 button-wrapper">
-        <v-btn
-          outlined
-          large
-          color="primary"
-          v-if="condition()"
-          class="request-btn w-100"
-          @click="handleRequest"
-          >request</v-btn
-        >
-      </div>
-    </div>
-
-    <request-form
-      v-if="this.$store.state.isRequest == true"
-      :uid="id"
-    ></request-form>
+        <el-card>
+          <el-row :gutter="20" class="tag-row">
+            <el-col>
+              <el-tag v-for="(tag, index) in userDetail[0].tags" :key="index">
+                {{ tag }}
+              </el-tag>
+              <el-tag type="danger"
+                >{{ userDetail[0].hourlyRate }} tl/hour</el-tag
+              >
+            </el-col>
+          </el-row>
+          <el-row type="flex" align="center" justify="center">
+            <el-button v-if="condition()" type="primary" @click="handleRequest"
+              >Request</el-button
+            >
+          </el-row>
+        </el-card>
+      </el-main>
+      <request-form
+        v-if="this.$store.state.isRequest == true"
+        :uid="id"
+      ></request-form>
+    </el-container>
   </div>
 </template>
 
@@ -75,6 +65,9 @@ export default {
       console.log(this.uid);
       this.$store.commit("isRequest");
       console.log(this.isRequest);
+    },
+    goBack() {
+      router.push("/");
     },
   },
 
@@ -144,20 +137,24 @@ export default {
   background-color: #fefefe;
 }
 
-.request-btn {
-  margin-top: 6rem;
+.el-card {
+  margin-bottom: 1rem;
+  height: auto;
 }
 
-.h-100 {
-  height: 100%;
+.el-tag {
+  margin-left: 0.5rem;
 }
 
-.button-wrapper {
-  position: relative;
+.tag-row {
+  margin-top: 1rem;
 }
-
-.mt-4 {
-  margin-top: 3rem;
-  margin-bottom: 3rem;
+.el-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.el-main {
+  width: 120vmin;
 }
 </style>
