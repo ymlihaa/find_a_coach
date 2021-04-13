@@ -2,10 +2,12 @@
   <el-container>
     <el-header type="flex">
       <el-menu
+        type="flex"
         :default-active="activeIndex"
         mode="horizontal"
         @select="handleSelect"
       >
+        <el-menu-item class="main-title">Find a Coach </el-menu-item>
         <el-menu-item index="1">
           <router-link to="/">
             <el-button size="small">
@@ -107,5 +109,9 @@ img {
 * {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+.main-title {
+  position: relative;
+  left: 0;
 }
 </style>
