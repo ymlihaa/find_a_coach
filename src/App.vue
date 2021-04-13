@@ -95,9 +95,13 @@ img {
   width: 1rem;
 }
 .el-menu {
+  padding-top: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: flex-end;
+}
+.el-main {
+  margin: 1rem;
 }
 
 * {
