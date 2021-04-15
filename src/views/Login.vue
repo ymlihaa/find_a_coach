@@ -70,8 +70,11 @@ export default {
           router.push("/messages");
         })
         .catch((error) => {
-          this.$store.commit("isDialog", { isShow: true });
-          this.errorMessage = error.message;
+          this.$notify({
+            title: "Warning",
+            message: error.message,
+            type: "warning",
+          });
         });
     },
     reset() {

@@ -88,8 +88,11 @@ export default {
             });
         })
         .catch((error) => {
-          this.errorMessage = error.message;
-          this.$store.commit("isDialog", { isShow: true });
+          this.$notify({
+            title: "Warning",
+            message: error.message,
+            type: "warning",
+          });
         });
     },
     reset() {
