@@ -50,10 +50,18 @@ export default {
         .then(() => {
           console.log(this.uid);
           this.show = true;
+          this.$notify({
+            title: "Success",
+            message: "Successfully",
+            type: "success",
+          });
           this.$store.commit("isRequest");
         })
         .catch((err) => {
-          console.log(err.message);
+          this.$notify.error({
+            title: "Error",
+            message: err.message,
+          });
         });
     },
     handleCancel() {
