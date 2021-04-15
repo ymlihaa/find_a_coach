@@ -114,6 +114,7 @@ export default {
                   this.$store.commit("updateLoginAndRegister", {
                     uid: user.uid,
                     isActive: true,
+                    mail: user.email,
                   });
                   console.log("uid : ", this.$store.state.uid);
                 });
