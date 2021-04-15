@@ -5,15 +5,17 @@
     width="50%"
     :before-close="handleCancel"
   >
-    <el-form>
-      <el-form-item label="Your E-mail">
-        <el-input type="email" v-model="email"></el-input>
+    <el-form :model="formData" :rules="rules" ref="formData">
+      <el-form-item label="Your E-mail" prop="email">
+        <el-input type="email" v-model="formData.email"></el-input>
       </el-form-item>
-      <el-form-item label="Your Message">
-        <el-input type="textarea" v-model="description"></el-input>
+      <el-form-item label="Your Message" prop="description">
+        <el-input type="textarea" v-model="formData.description"></el-input>
       </el-form-item>
       <el-form-item class="buttons">
-        <el-button type="success" @click="sendRequest">Send</el-button>
+        <el-button type="success" @click="sendRequest('formData')"
+          >Send</el-button
+        >
       </el-form-item>
     </el-form>
   </el-dialog>
@@ -32,37 +34,61 @@ export default {
   data() {
     return {
       dialog: this.$store.state.isRequest,
-      email: "",
-      description: "",
+      formData: {
+        email: "",
+        description: "",
+      },
+      rules: {
+        email: [
+          {
+            required: true,
+            message: "Please enter your E-mail",
+            trigger: "blur",
+          },
+        ],
+        description: [
+          {
+            required: true,
+            message: "Please enter your description .",
+            trigger: "blur",
+          },
+        ],
+      },
     };
   },
   methods: {
-    sendRequest() {
+    sendRequest(formName) {
       const requestID = this.makeid(7);
       console.log(requestID);
 
-      db.collection(this.uid)
-        .doc(requestID)
-        .set({
-          mail: this.email,
-          msg: this.description,
-        })
-        .then(() => {
-          console.log(this.uid);
-          this.show = true;
-          this.$notify({
-            title: "Success",
-            message: "Successfully",
-            type: "success",
-          });
-          this.$store.commit("isRequest");
-        })
-        .catch((err) => {
-          this.$notify.error({
-            title: "Error",
-            message: err.message,
-          });
-        });
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          db.collection(this.uid)
+            .doc(requestID)
+            .set({
+              mail: this.formData.email,
+              msg: this.formData.description,
+            })
+            .then(() => {
+              console.log(this.uid);
+              this.show = true;
+              this.$notify({
+                title: "Success",
+                message: "Successfully",
+                type: "success",
+              });
+              this.$store.commit("isRequest");
+            })
+            .catch((err) => {
+              this.$notify.error({
+                title: "Error",
+                message: err.message,
+              });
+            });
+        } else {
+          return false;
+        }
+      });
     },
     handleCancel() {
       this.$store.commit("isRequest");
