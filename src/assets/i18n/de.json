@@ -1,0 +1,21 @@
+{
+    "nav_login":"Anmeldung",
+    "nav_signUp":"Anmelden",
+    "nav_message":"Mitteilungen",
+    "nav_Profile":"Profil",
+    "nav_Home":"Zuhause",
+    "nav_Logout":"Ausloggen",
+    "btn_Send":"Senden",
+    "btn_Reset":"zurücksetzen",
+    "btn_Save":"speichern",
+    "btn_Edit":"bearbeiten",
+    "btn_Register":"Anmelden",
+    "label_Email":"E-mail",
+    "label_Password":"Passwort",
+    "label_ConfirmPass":"Kennwort bestätigen",
+    "label_FirstName":"Vorname",
+    "label_LastName":"Nachname",
+    "label_Description":"Beschreibung",
+    "label_HourlyRate":"Stundensatz",
+    "label_Tags":"Stichworte"
+}

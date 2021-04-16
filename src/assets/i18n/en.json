@@ -1,0 +1,20 @@
+{
+    "nav_login":"login",
+    "nav_signUp":"Sign Up",
+    "nav_message":"Messages",
+    "nav_Profile":"Profile",
+    "nav_Home":"Home",
+    "btn_Send":"Send",
+    "btn_Reset":"Reset",
+    "btn_Save":"Save",
+    "btn_Edit":"Edit",
+    "btn_Register":"Sign Up",
+    "label_Email":"E-mail",
+    "label_Password":"Password",
+    "label_ConfirmPass":"Confirm Password",
+    "label_FirstName":"First Name",
+    "label_LastName":"Last Name",
+    "label_Description":"Description",
+    "label_HourlyRate":"Hourly Rate",
+    "label_Tags":"Tags"
+}

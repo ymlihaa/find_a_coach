@@ -11,6 +11,11 @@ import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import AnimatedVue from "animated-vue";
 import "animate.css/animate.css";
+import i18n from "./i18n";
+
+const lang = localStorage.getItem("lang") || "en";
+axios.defaults.headers["Accept-Language"] = lang;
+
 Vue.use(ElementUI);
 Vue.use(AnimatedVue);
 
@@ -20,6 +25,7 @@ Vue.use(VueEllipseProgress);
 Vue.config.productionTip = false;
 
 new Vue({
+  i18n,
   store,
   AnimatedVue,
   router,

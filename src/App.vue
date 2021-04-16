@@ -11,14 +11,15 @@
         <el-menu-item index="1">
           <router-link to="/">
             <el-button size="small">
-              <img src="./assets/home.svg" alt="" /> Home
+              <img src="./assets/home.svg" alt="" /> {{ $t("nav_Home") }}
             </el-button>
           </router-link>
         </el-menu-item>
         <el-menu-item index="2" v-if="this.$store.state.isActive">
           <router-link to="/profile">
             <el-button size="small">
-              <img src="./assets/profile.svg" alt="" />Profile</el-button
+              <img src="./assets/profile.svg" alt="" />
+              {{ $t("nav_Profile") }}</el-button
             >
           </router-link>
         </el-menu-item>
@@ -26,20 +27,20 @@
           <router-link to="/login">
             <el-button size="small">
               <img src="./assets/login.svg" alt="" />
-              Login</el-button
+              {{ $t("nav_login") }}</el-button
             >
           </router-link>
         </el-menu-item>
         <el-menu-item index="4" v-if="!this.$store.state.isActive">
           <router-link to="/register">
-            <el-button size="small">Sign Up</el-button>
+            <el-button size="small"> {{ $t("nav_signUp") }}</el-button>
           </router-link>
         </el-menu-item>
         <el-menu-item index="5" v-if="this.$store.state.isActive">
           <el-container>
             <el-badge :value="this.$store.state.msgCount">
               <router-link to="/messages">
-                <el-button size="small">Messages</el-button>
+                <el-button size="small"> {{ $t("nav_message") }}</el-button>
               </router-link>
             </el-badge>
           </el-container></el-menu-item
@@ -56,6 +57,10 @@
           ></el-menu-item
         >
       </el-menu>
+      <el-select v-model="lang" :placeholder="lang" @change="handleLang">
+        <el-option value="en"> </el-option>
+        <el-option value="de"> </el-option>
+      </el-select>
     </el-header>
     <el-main>
       <transition
@@ -75,6 +80,7 @@ export default {
 
   data() {
     return {
+      lang: "",
       activeIndex: "1",
       links: ["/", "/login", "/register"],
     };
@@ -87,6 +93,11 @@ export default {
       router.currentRoute.path === "/"
         ? window.location.reload()
         : router.push("/");
+    },
+    handleLang(event) {
+      console.log(event);
+      localStorage.setItem("lang", event);
+      window.location.reload();
     },
   },
 };
