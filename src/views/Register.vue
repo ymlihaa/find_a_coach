@@ -13,23 +13,28 @@
             :rules="rules"
             ref="formData"
           >
-            <el-form-item label="E-mail" prop="email">
+            <el-form-item :label="$t('label_Email')" prop="email">
               <el-input type="email" v-model="formData.email"></el-input>
             </el-form-item>
-            <el-form-item label="Password" prop="password">
+            <el-form-item :label="$t('label_Password')" prop="password">
               <el-input type="password" v-model="formData.password"></el-input>
             </el-form-item>
-            <el-form-item label="Confirm Password" prop="confirmPassword">
+            <el-form-item
+              :label="$t('label_ConfirmPass')"
+              prop="confirmPassword"
+            >
               <el-input
                 type="password"
                 v-model="formData.confirmPassword"
               ></el-input>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" @click="registerUser('formData')"
-                >Sing Up</el-button
-              >
-              <el-button type="danger" @click="reset">Reset</el-button>
+              <el-button type="primary" @click="registerUser('formData')">{{
+                $t("btn_Register")
+              }}</el-button>
+              <el-button type="danger" @click="reset">{{
+                $t("btn_Reset")
+              }}</el-button>
             </el-form-item>
           </el-form>
         </el-col>
@@ -59,7 +64,12 @@ export default {
     "dialog-app": Dialog,
   },
   data() {
+    var localMessage = (param) => {
+      return this.$i18n.messages[localStorage.getItem("lang") || "en"][param];
+    };
+
     return {
+      lang: localStorage.getItem("lang") || "en",
       errorMessage: "",
       formData: {
         email: "",
@@ -70,21 +80,22 @@ export default {
         email: [
           {
             required: true,
-            message: "Please enter your E-mail adress .",
+            message: localMessage("validate_Email"),
             trigger: "blur",
           },
         ],
+
         password: [
           {
             required: true,
-            message: "Please enter your password .",
+            message: localMessage("validate_Password"),
             trigger: "blur",
           },
         ],
         confirmPassword: [
           {
             required: true,
-            message: "Please confirm your password .",
+            message: localMessage("validate_ConfirmPass"),
             trigger: "blur",
           },
         ],

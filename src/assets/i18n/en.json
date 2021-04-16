@@ -20,6 +20,9 @@
     "label_Description":"Description",
     "label_HourlyRate":"Hourly Rate",
     "label_Tags":"Tags",
-    "label_sendMessage":"Send a message ."
+    "label_sendMessage":"Send a message .",
+    "validate_Email":"Please enter your E-mail adress .",
+    "validate_Password": "Please enter your password .",
+    "validate_ConfirmPass":"Please confirm your password ."
 
 }

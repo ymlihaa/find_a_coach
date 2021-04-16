@@ -20,5 +20,10 @@
     "label_Description":"Beschreibung",
     "label_HourlyRate":"Stundensatz",
     "label_Tags":"Stichworte",
-    "label_sendMessage":"Eine Nachricht schicken ."
+    "label_sendMessage":"Eine Nachricht schicken .",
+    "validate_Email":"Bitte geben Sie Ihre E-Mail-Adresse an .",
+    "validate_Password":"Bitte geben Sie Ihr Passwort ein .",
+    "validate_ConfirmPass":"Bitte bestätigen Sie Ihr Passwort ."
+
+
 }
