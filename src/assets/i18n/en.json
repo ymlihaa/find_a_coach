@@ -25,6 +25,8 @@
     "validate_Email":"Please enter your E-mail adress .",
     "validate_Password": "Please enter your password .",
     "validate_ConfirmPass":"Please confirm your password .",
-    "validate_Description":"Please enter your description ."
-
+    "validate_Description":"Please enter your description .",
+    "validate_FirstName": "Please enter your first name .",
+    "validate_LastName":"Please enter your last name .",
+    "validate_HourlyRate": "Please enter your hourly price "
 }

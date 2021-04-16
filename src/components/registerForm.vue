@@ -2,16 +2,16 @@
   <el-container type="flex">
     <el-main align="center">
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm">
-        <el-form-item label="First Name" prop="firstName">
+        <el-form-item :label="$t('label_FirstName')" prop="firstName">
           <el-input v-model="ruleForm.firstName" type="text"></el-input>
         </el-form-item>
-        <el-form-item label="Last Name" prop="lastName">
+        <el-form-item :label="$t('label_LastName')" prop="lastName">
           <el-input type="text" v-model="ruleForm.lastName"></el-input>
         </el-form-item>
-        <el-form-item label="Description" prop="description">
+        <el-form-item :label="$t('label_Description')" prop="description">
           <el-input type="textarea" v-model="ruleForm.description"></el-input>
         </el-form-item>
-        <el-form-item label="Hourly Rate" prop="hourlyRate">
+        <el-form-item :label="$t('label_HourlyRate')" prop="hourlyRate">
           <el-input type="text" v-model="ruleForm.hourlyRate"></el-input>
         </el-form-item>
         <el-form-item>
@@ -22,9 +22,9 @@
           </el-checkbox-group>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="handleSave('ruleForm')"
-            >Save</el-button
-          >
+          <el-button type="primary" @click="handleSave('ruleForm')">{{
+            $t("btn_Save")
+          }}</el-button>
         </el-form-item>
       </el-form>
     </el-main>
@@ -40,6 +40,9 @@ import router from "../router/index";
 
 export default {
   data() {
+    var localMessage = (param) => {
+      return this.$i18n.messages[localStorage.getItem("lang") || "en"][param];
+    };
     return {
       ruleForm: {
         firstName: "",
@@ -55,28 +58,28 @@ export default {
         firstName: [
           {
             required: true,
-            message: "Please enter your first name .",
+            message: localMessage("validate_FirstName"),
             trigger: "blur",
           },
         ],
         lastName: [
           {
             required: true,
-            message: "Please enter your last name .",
+            message: localMessage("validate_LastName"),
             trigger: "blur",
           },
         ],
         description: [
           {
             required: true,
-            message: "Plase enter your description .",
+            message: localMessage("validate_Description"),
             trigger: "blur",
           },
         ],
         hourlyRate: [
           {
             required: true,
-            message: "Please enter your hourly price ",
+            message: localMessage("validate_HourlyRate"),
             trigger: "blur",
           },
         ],

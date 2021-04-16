@@ -25,7 +25,9 @@
     "validate_Email":"Bitte geben Sie Ihre E-Mail-Adresse an .",
     "validate_Password":"Bitte geben Sie Ihr Passwort ein .",
     "validate_ConfirmPass":"Bitte bestätigen Sie Ihr Passwort .",
-    "validate_Description":"Bitte geben Sie Ihre Beschreibung ein."
-
+    "validate_Description":"Bitte geben Sie Ihre Beschreibung ein.",
+    "validate_FirstName": "Bitte geben Sie Ihren Vornamen ein .",
+    "validate_LastName":"Bitte geben Sie ihren Nachnamen ein .",
+    "validate_HourlyRate": "Bitte geben Sie Ihren Stundenpreis ein"
 
 }
