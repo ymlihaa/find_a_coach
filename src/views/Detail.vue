@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-page-header @back="goBack" title="Back"> </el-page-header>
+    <el-page-header @back="goBack" :title="$t('label_Back')"> </el-page-header>
 
     <el-container>
       <el-header>
@@ -9,7 +9,9 @@
       <el-main>
         <el-card>
           <el-row>
-            <el-col> <h1>Description</h1></el-col>
+            <el-col>
+              <h1>{{ $t("label_Description") }}</h1></el-col
+            >
           </el-row>
           <el-divider></el-divider>
           <el-row>
@@ -29,8 +31,11 @@
             </el-col>
           </el-row>
           <el-row type="flex" align="center" justify="center">
-            <el-button v-if="condition()" type="primary" @click="handleRequest"
-              >Request</el-button
+            <el-button
+              v-if="condition()"
+              type="primary"
+              @click="handleRequest"
+              >{{ $t("btn_Request") }}</el-button
             >
           </el-row>
         </el-card>
