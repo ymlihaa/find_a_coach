@@ -1,28 +1,28 @@
 <template>
   <el-main>
     <el-form align="center" :model="formData" ref="formData" :rules="rules">
-      <el-form-item label="First Name" prop="firstName">
+      <el-form-item :label="$t('label_FirstName')" prop="firstName">
         <el-input v-model="formData.firstName"></el-input>
       </el-form-item>
-      <el-form-item label="Last Name" prop="lastName">
+      <el-form-item :label="$t('label_LastName')" prop="lastName">
         <el-input v-model="formData.lastName"></el-input>
       </el-form-item>
-      <el-form-item label="Description" prop="description">
+      <el-form-item :label="$t('label_Description')" prop="description">
         <el-input type="textarea" v-model="formData.description"></el-input>
       </el-form-item>
-      <el-form-item label="Hourly Rate" prop="hourlyRate">
+      <el-form-item :label="$t('label_HourlyRate')" prop="hourlyRate">
         <el-input v-model="formData.hourlyRate"></el-input>
       </el-form-item>
-      <el-form-item label="Tags">
+      <el-form-item :label="$t('label_Tags')">
         <el-checkbox-group v-model="formData.tags">
           <el-checkbox label="frontend"></el-checkbox>
           <el-checkbox label="backend"></el-checkbox>
           <el-checkbox label="career"></el-checkbox>
         </el-checkbox-group>
       </el-form-item>
-      <el-button type="primary" @click="handleSave('formData')"
-        >Complete</el-button
-      >
+      <el-button type="primary" @click="handleSave('formData')">{{
+        $t("btn_Save")
+      }}</el-button>
     </el-form>
   </el-main>
 </template>
@@ -38,6 +38,9 @@ export default {
     // "success-app": Success,
   },
   data() {
+    var localMessage = (param) => {
+      return this.$i18n.messages[localStorage.getItem("lang") || "en"][param];
+    };
     return {
       formData: {
         hourlyRate: this.userDetail.hourlyRate,
@@ -51,28 +54,28 @@ export default {
         hourlyRate: [
           {
             required: true,
-            message: "Please enter your hourly price .",
+            message: localMessage("validate_HourlyRate"),
             trigger: "blur",
           },
         ],
         firstName: [
           {
             required: true,
-            message: "Please enter your first name  .",
+            message: localMessage("validate_FirstName"),
             trigger: "blur",
           },
         ],
         lastName: [
           {
             required: true,
-            message: "Please enter your last name .",
+            message: localMessage("validate_LastName"),
             trigger: "blur",
           },
         ],
         description: [
           {
             required: true,
-            message: "Please enter your description .",
+            message: localMessage("validate_Description"),
             trigger: "blur",
           },
         ],

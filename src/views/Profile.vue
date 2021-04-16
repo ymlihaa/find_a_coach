@@ -6,7 +6,9 @@
           {{ userDetail.firstName }} {{ userDetail.lastName }}
         </el-col>
         <el-col :span="2">
-          <el-button type="info" @click="editProfile">Edit</el-button>
+          <el-button type="info" @click="editProfile">{{
+            $t("btn_Edit")
+          }}</el-button>
         </el-col>
       </el-row>
     </el-header>
