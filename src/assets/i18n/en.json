@@ -5,6 +5,7 @@
     "nav_Profile":"Profile",
     "nav_Home":"Home",
     "nav_Logout":"Logout",
+    "btn_Login":"Login",
     "btn_Send":"Send",
     "btn_Reset":"Reset",
     "btn_Save":"Save",

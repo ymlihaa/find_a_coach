@@ -14,10 +14,10 @@
             :rules="rules"
             ref="ruleForm"
           >
-            <el-form-item label="E-mail" prop="email">
+            <el-form-item :label="$t('label_Email')" prop="email">
               <el-input v-model="ruleForm.email"></el-input>
             </el-form-item>
-            <el-form-item label="Password" prop="password">
+            <el-form-item :label="$t('label_Password')" prop="password">
               <el-input
                 type="password"
                 v-model="ruleForm.password"
@@ -25,10 +25,12 @@
               ></el-input>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" @click="handleLogin('ruleForm')"
-                >Log In</el-button
-              >
-              <el-button type="danger" @click="reset">Reset</el-button>
+              <el-button type="primary" @click="handleLogin('ruleForm')">{{
+                $t("btn_Login")
+              }}</el-button>
+              <el-button type="danger" @click="reset">{{
+                $t("btn_Reset")
+              }}</el-button>
             </el-form-item>
           </el-form>
         </el-col>
@@ -54,6 +56,10 @@ export default {
     "dialog-app": Dialog,
   },
   data() {
+    var localMessage = (param) => {
+      return this.$i18n.messages[localStorage.getItem("lang") || "en"][param];
+    };
+
     return {
       ruleForm: {
         email: "",
@@ -66,14 +72,14 @@ export default {
         email: [
           {
             required: true,
-            message: "Please enter your E-mail adress .",
+            message: localMessage("validate_Email"),
             trigger: "blur",
           },
         ],
         password: [
           {
             required: true,
-            message: "Please enter your password .",
+            message: localMessage("validate_Password"),
             trigger: "blur",
           },
         ],
