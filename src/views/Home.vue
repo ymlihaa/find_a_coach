@@ -26,10 +26,14 @@
             </el-tag>
           </el-col>
           <el-col class="buttons" :span="5">
-            <el-button v-if="condition(item.id)" @click="handleRequest(item.id)"
-              >Contact</el-button
+            <el-button
+              v-if="condition(item.id)"
+              @click="handleRequest(item.id)"
+              >{{ $t("btn_Contact") }}</el-button
             >
-            <el-button @click="navigateDetail(item.id)">View Detail</el-button>
+            <el-button @click="navigateDetail(item.id)">{{
+              $t("btn_ViewDetail")
+            }}</el-button>
           </el-col>
         </el-row>
       </el-card>
