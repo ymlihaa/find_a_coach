@@ -19,5 +19,6 @@
     "label_LastName":"Nachname",
     "label_Description":"Beschreibung",
     "label_HourlyRate":"Stundensatz",
-    "label_Tags":"Stichworte"
+    "label_Tags":"Stichworte",
+    "label_sendMessage":"Eine Nachricht schicken ."
 }

@@ -19,5 +19,7 @@
     "label_LastName":"Last Name",
     "label_Description":"Description",
     "label_HourlyRate":"Hourly Rate",
-    "label_Tags":"Tags"
+    "label_Tags":"Tags",
+    "label_sendMessage":"Send a message ."
+
 }

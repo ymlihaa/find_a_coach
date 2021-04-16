@@ -1,21 +1,21 @@
 <template>
   <el-dialog
-    title="Send a message ."
+    :title="$t('label_sendMessage')"
     :visible.sync="dialog"
     width="50%"
     :before-close="handleCancel"
   >
     <el-form :model="formData" :rules="rules" ref="formData">
-      <el-form-item label="Your E-mail" prop="email">
+      <el-form-item :label="$t('label_Email')" prop="email">
         <el-input type="email" v-model="formData.email"></el-input>
       </el-form-item>
-      <el-form-item label="Your Message" prop="description">
+      <el-form-item :label="$t('label_Description')" prop="description">
         <el-input type="textarea" v-model="formData.description"></el-input>
       </el-form-item>
       <el-form-item class="buttons">
-        <el-button type="success" @click="sendRequest('formData')"
-          >Send</el-button
-        >
+        <el-button type="success" @click="sendRequest('formData')">{{
+          $t("btn_Send")
+        }}</el-button>
       </el-form-item>
     </el-form>
   </el-dialog>
