@@ -7,6 +7,17 @@
         mode="horizontal"
         @select="handleSelect"
       >
+        <el-menu-item>
+          <el-select
+            v-model="lang"
+            placeholder="lang"
+            @change="handleLang"
+            size="small"
+          >
+            <el-option value="en"> </el-option>
+            <el-option value="de"> </el-option>
+          </el-select>
+        </el-menu-item>
         <el-menu-item class="main-title">Find a Coach </el-menu-item>
         <el-menu-item index="1">
           <router-link to="/">
@@ -57,10 +68,6 @@
           ></el-menu-item
         >
       </el-menu>
-      <el-select v-model="lang" :placeholder="lang" @change="handleLang">
-        <el-option value="en"> </el-option>
-        <el-option value="de"> </el-option>
-      </el-select>
     </el-header>
     <el-main>
       <transition
@@ -80,7 +87,7 @@ export default {
 
   data() {
     return {
-      lang: "",
+      lang: localStorage.getItem("lang") || "en",
       activeIndex: "1",
       links: ["/", "/login", "/register"],
     };
@@ -124,5 +131,9 @@ img {
 .main-title {
   position: relative;
   left: 0;
+}
+
+.el-select {
+  width: 4rem;
 }
 </style>
