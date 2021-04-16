@@ -24,7 +24,8 @@
     "label_sendMessage":"Eine Nachricht schicken .",
     "validate_Email":"Bitte geben Sie Ihre E-Mail-Adresse an .",
     "validate_Password":"Bitte geben Sie Ihr Passwort ein .",
-    "validate_ConfirmPass":"Bitte bestätigen Sie Ihr Passwort ."
+    "validate_ConfirmPass":"Bitte bestätigen Sie Ihr Passwort .",
+    "validate_Description":"Bitte geben Sie Ihre Beschreibung ein."
 
 
 }

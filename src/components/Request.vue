@@ -32,6 +32,9 @@ export default {
   },
   props: ["uid"],
   data() {
+    var localMessage = (param) => {
+      return this.$i18n.messages[localStorage.getItem("lang") || "en"][param];
+    };
     return {
       dialog: this.$store.state.isRequest,
       formData: {
@@ -42,14 +45,14 @@ export default {
         email: [
           {
             required: true,
-            message: "Please enter your E-mail",
+            message: localMessage("validate_Email"),
             trigger: "blur",
           },
         ],
         description: [
           {
             required: true,
-            message: "Please enter your description .",
+            message: localMessage("validate_Description"),
             trigger: "blur",
           },
         ],
