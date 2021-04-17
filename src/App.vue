@@ -64,7 +64,7 @@
               src="./assets/logout.svg"
               alt=""
             />
-            Log Out</el-button
+            {{ $t("nav_Logout") }}</el-button
           ></el-menu-item
         >
       </el-menu>
