@@ -55,6 +55,9 @@ const collectionPath = "users";
 import router from "../router/index";
 import Request from "../components/Request";
 import Progress from "../components/Progress";
+import firebase from "firebase/app";
+import "firebase/auth";
+
 export default {
   name: "Home",
   components: {
@@ -64,7 +67,7 @@ export default {
   props: ["firebaseData"],
   data() {
     return {
-      uid: this.$store.state.uid ? this.$store.state.uid : null,
+      uid: null,
       receiverId: "",
       allCoach: [],
       filterTag: [],
@@ -134,6 +137,11 @@ export default {
         this.$store.dispatch("isLoading");
       });
     },
+  },
+  mounted() {
+    this.uid = firebase.auth().currentUser.uid
+      ? firebase.auth().currentUser.uid
+      : null;
   },
 };
 </script>

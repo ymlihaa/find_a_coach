@@ -37,6 +37,8 @@
 import { db } from "../firebase";
 const collectionPath = "users";
 import router from "../router/index";
+import firebase from "firebase/app";
+import "firebase/auth";
 
 export default {
   data() {
@@ -58,10 +60,9 @@ export default {
   },
 
   created() {
-    console.log(this.$store.state.uid);
     this.$bind(
       "userDetail",
-      db.collection(collectionPath).doc(this.$store.state.uid)
+      db.collection(collectionPath).doc(firebase.auth().currentUser.uid)
     );
   },
 };

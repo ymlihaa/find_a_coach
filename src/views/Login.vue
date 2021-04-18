@@ -96,15 +96,12 @@ export default {
               this.ruleForm.email,
               this.ruleForm.password
             )
-            .then((user) => {
-              console.log(user.user.email);
-              const uid = user.user.uid;
-              const email = user.user.email;
-              this.$store.commit("updateLoginAndRegister", {
-                uid: uid,
-                isActive: true,
-                mail: email,
+            .then(() => {
+              localStorage.setItem("TOKEN", true);
+              this.$store.commit("changeStateAuth", {
+                user: firebase.auth().currentUser,
               });
+              this.$store.commit("changeNavState", { isShow: true });
               router.push("/messages");
             })
             .catch((error) => {

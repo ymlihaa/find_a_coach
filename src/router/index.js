@@ -1,8 +1,10 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import { store } from "../store/store";
+import firebase from "firebase/app";
+import "firebase/auth";
 
+// import { store } from "../store/store";
 Vue.use(VueRouter);
 
 const routes = [
@@ -33,9 +35,7 @@ const routes = [
   {
     path: "/profile",
     name: "Profile",
-    beforeEnter: (to, from, next) => {
-      !store.state.isActive ? next({ name: "Login" }) : next();
-    },
+    meta: { requiresAuth: true },
 
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -48,6 +48,7 @@ const routes = [
     path: "/detail",
     name: "Detail",
     props: true,
+
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -57,9 +58,8 @@ const routes = [
   {
     path: "/messages",
     name: "Messages",
-    beforeEnter: (to, from, next) => {
-      !store.state.isActive ? next({ name: "Login" }) : next();
-    },
+    meta: { requiresAuth: true },
+
     props: true,
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -71,9 +71,8 @@ const routes = [
   {
     path: "/editProfile",
     name: "EditProfile",
-    beforeEnter: (to, from, next) => {
-      !store.state.isActive ? next({ name: "Login" }) : next();
-    },
+    meta: { requiresAuth: true },
+
     props: true,
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -87,6 +86,17 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
+  const isAuthenticated = firebase.auth().currentUser;
+  console.log("isauthenticated", isAuthenticated);
+  if (requiresAuth && !isAuthenticated) {
+    router.push("/login");
+  } else {
+    next();
+  }
 });
 
 export default router;

@@ -8,7 +8,7 @@
         <el-col class="form-container">
           <el-form
             align="center"
-            v-if="this.$store.state.isActive === false"
+            v-if="this.$store.state.showNav === false"
             :model="formData"
             :rules="rules"
             ref="formData"
@@ -40,7 +40,7 @@
         </el-col>
       </el-row>
     </el-main>
-    <form-register v-if="this.$store.state.isActive === true"></form-register>
+    <form-register v-if="this.$store.state.showNav === true"></form-register>
     <dialog-app
       v-if="this.$store.state.dialog"
       :dialogMessage="errorMessage"
@@ -113,6 +113,8 @@ export default {
               this.formData.password.trim()
             )
             .then((userCredential) => {
+              localStorage.setItem("TOKEN", true);
+              this.$store.commit("changeNavState", { isShow: true });
               var user = userCredential.user;
               console.log(user);
               return db
@@ -122,11 +124,6 @@ export default {
                   email: user.email,
                 })
                 .then(() => {
-                  this.$store.commit("updateLoginAndRegister", {
-                    uid: user.uid,
-                    isActive: true,
-                    mail: user.email,
-                  });
                   console.log("uid : ", this.$store.state.uid);
                 });
             })

@@ -37,7 +37,8 @@
 <script>
 import { db } from "../firebase";
 import router from "../router/index";
-
+import firebase from "firebase/app";
+import "firebase/auth";
 export default {
   data() {
     var localMessage = (param) => {
@@ -91,7 +92,7 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           db.collection("users")
-            .doc(this.$store.state.uid)
+            .doc(firebase.auth().currentUser.uid)
             .set({
               firstName: this.ruleForm.firstName,
               lastName: this.ruleForm.lastName,

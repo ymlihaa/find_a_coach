@@ -26,7 +26,7 @@
             </el-button>
           </router-link>
         </el-menu-item>
-        <el-menu-item index="2" v-if="this.$store.state.isActive">
+        <el-menu-item index="2" v-if="this.$store.state.showNav == true">
           <router-link to="/profile">
             <el-button size="small">
               <img src="./assets/profile.svg" alt="" />
@@ -34,7 +34,7 @@
             >
           </router-link>
         </el-menu-item>
-        <el-menu-item index="3" v-if="!this.$store.state.isActive">
+        <el-menu-item index="3" v-if="this.$store.state.showNav == false">
           <router-link to="/login">
             <el-button size="small">
               <img src="./assets/login.svg" alt="" />
@@ -42,12 +42,12 @@
             >
           </router-link>
         </el-menu-item>
-        <el-menu-item index="4" v-if="!this.$store.state.isActive">
+        <el-menu-item index="4" v-if="this.$store.state.showNav == false">
           <router-link to="/register">
             <el-button size="small"> {{ $t("nav_signUp") }}</el-button>
           </router-link>
         </el-menu-item>
-        <el-menu-item index="5" v-if="this.$store.state.isActive">
+        <el-menu-item index="5" v-if="this.$store.state.showNav == true">
           <el-container>
             <el-badge :value="this.$store.state.msgCount">
               <router-link to="/messages">
@@ -56,7 +56,7 @@
             </el-badge>
           </el-container></el-menu-item
         >
-        <el-menu-item index="6" v-if="this.$store.state.isActive"
+        <el-menu-item index="6" v-if="this.$store.state.showNav === true"
           ><el-button size="small" @click="handleLogout">
             <img
               id="logout-icon"
@@ -82,6 +82,8 @@
 
 <script>
 import router from "./router/index";
+import firebase from "firebase/app";
+import "firebase/auth";
 export default {
   name: "App",
 
@@ -94,9 +96,15 @@ export default {
   },
   methods: {
     handleLogout() {
-      this.$store.commit("updateLogout");
-      this.$store.state.msgCount = 0;
-      console.log("current Route : ", router.currentRoute.path);
+      // this.$store.commit("updateLogout");
+      // this.$store.state.msgCount = 0;
+      // console.log("current Route : ", router.currentRoute.path);
+      firebase.auth().signOut();
+      this.$store.commit("changeStateAuth", {
+        user: firebase.auth().currentUser,
+      });
+      localStorage.removeItem("TOKEN");
+      this.$store.commit("changeNavState", { isShow: false });
       router.currentRoute.path === "/"
         ? window.location.reload()
         : router.push("/");

@@ -31,7 +31,8 @@
 import { db } from "../firebase";
 import router from "../router/index";
 // import Success from "../components/Success";
-
+import firebase from "firebase/app";
+import "firebase/auth";
 export default {
   props: ["userDetail"],
   components: {
@@ -44,7 +45,9 @@ export default {
     return {
       formData: {
         hourlyRate: this.userDetail.hourlyRate,
-        tags: this.userDetail.tags,
+        tags: this.userDetail.tags.filter(
+          (t) => !this.userDetail.tags.includes(t)
+        ),
         firstName: this.userDetail.firstName,
         lastName: this.userDetail.lastName,
         description: this.userDetail.description,
@@ -87,7 +90,7 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           db.collection("users")
-            .doc(this.$store.state.uid)
+            .doc(firebase.auth().currentUser.uid)
             .set({
               firstName: this.formData.firstName,
               lastName: this.formData.lastName,

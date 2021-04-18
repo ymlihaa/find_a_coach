@@ -1,17 +1,18 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import firebase from "firebase/app";
+import "firebase/auth";
 
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state: {
-    uid: null,
-    isActive: false,
+    isAuthenticated: firebase.auth().currentUser || null,
     loading: false,
     isRequest: false,
     msgCount: 0,
-    currentUserEmail: "",
     dialog: false,
+    showNav: localStorage.getItem("TOKEN") == "true" || false,
   },
   mutations: {
     updateLoginAndRegister(state, payload) {
@@ -32,6 +33,15 @@ export const store = new Vuex.Store({
     },
     isDialog(state, payload) {
       state.dialog = payload.isShow;
+    },
+    setCurrentUser(state, { isActive }) {
+      state.currentUser = isActive;
+    },
+    changeStateAuth(state, { user }) {
+      state.isAuthenticated = user;
+    },
+    changeNavState(state, { isShow }) {
+      state.showNav = isShow;
     },
   },
 
