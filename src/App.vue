@@ -90,11 +90,15 @@ export default {
   data() {
     return {
       lang: localStorage.getItem("lang") || "en",
-      activeIndex: "1",
+      activeIndex: localStorage.getItem("activeIndex") || "1",
       links: ["/", "/login", "/register"],
     };
   },
   methods: {
+    handleSelect(e) {
+      localStorage.setItem("activeIndex", e);
+    },
+
     handleLogout() {
       // this.$store.commit("updateLogout");
       // this.$store.state.msgCount = 0;
