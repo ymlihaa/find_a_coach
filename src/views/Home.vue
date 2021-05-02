@@ -81,6 +81,11 @@ export default {
   methods: {
     navigateDetail(uid) {
       const senderId = this.uid;
+      const detailData = {
+        uid: uid,
+        senderId: senderId,
+      };
+      localStorage.setItem("detailData", JSON.stringify(detailData));
       router.push({
         name: "Detail",
         params: { uid, senderId },

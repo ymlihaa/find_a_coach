@@ -79,11 +79,13 @@ export default {
   computed: {
     condition: function () {
       var vm = this;
+      const localData = JSON.parse(localStorage.getItem("detailData"));
+
       return function () {
         console.log("functions : ", vm.uid);
         console.log("fuıctin:", vm.senderId);
-        if (vm.id !== undefined) {
-          if (vm.id == vm.senderId) {
+        if (vm.id !== undefined || localData.uid) {
+          if (vm.id == vm.senderId || vm.id == localData.senderId) {
             return false;
           }
         }
@@ -92,10 +94,18 @@ export default {
     },
   },
 
+  created() {
+    const localData = JSON.parse(localStorage.getItem("detailData"));
+    if (this.uid || localData.uid) {
+      this.id = this.uid || localData.uid;
+    }
+  },
+
   mounted() {
-    if (this.uid) {
+    const localData = JSON.parse(localStorage.getItem("detailData"));
+    if (this.uid || localData.uid) {
       db.collection("users")
-        .doc(this.uid)
+        .doc(this.uid || localData.uid)
         .get()
         .then((snapShot) => {
           this.userDetail.push(snapShot.data());
